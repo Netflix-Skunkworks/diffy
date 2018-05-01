@@ -25,7 +25,7 @@ def retry_throttled(exception):
     """
     logger.debug(exception)
     if isinstance(exception, ClientError):
-        if exception.response['Error']['Code'] != 'InvocationDoesNotExist':
+        if exception.response['Error']['Code'] == 'ThrottlingException':
             return True
     return False
 
