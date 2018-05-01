@@ -1,0 +1,19 @@
+-r requirements.txt
+-r web-requirements.txt
+bandit
+bumpversion
+codecov
+mypy
+pip-tools
+pre-commit-hooks
+pytest
+codecov
+pytest-cov
+pytest-flask
+Sphinx
+sphinx-autodoc-annotation
+bumpversion
+mypy
+bandit
+pytest-flask
+pre-commit

@@ -1,0 +1,28 @@
+language: python
+
+matrix:
+  include:
+    - python: "3.6"
+
+cache:
+  directories:
+    - .pip_download_cache
+
+before_script:
+  - pip install --upgrade pip
+  - pip install --upgrade setuptools
+  - pip install -r requirements.txt
+  - pip install -r dev-requirements.txt
+
+script:
+  - coverage run -m py.test || exit 1
+  - mypy -p diffy --ignore-missing-imports || exit 1
+  - bandit -r . -ll -ii -x tests/,docs
+
+after_success:
+  - coveralls
+
+notifications:
+  email:
+    - fmonsen@netflix.com
+    - kglisson@netflix.com
