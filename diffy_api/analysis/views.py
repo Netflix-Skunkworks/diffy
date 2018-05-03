@@ -5,17 +5,17 @@
     :license: Apache, see LICENSE for more details.
 .. moduleauthor:: Kevin Glisson <kglisson@netflix.com>
 """
-from flask import Blueprint, current_app
+from flask import Blueprint, current_app, request
 from flask_restful import reqparse, Api, Resource
 
-from diffy.core import analysis
 from diffy.plugins.base import plugins
 from diffy.exceptions import TargetNotFound
 
-from diffy_api.common.schema import validate_schema
+from diffy_api.core import async_analysis
+from diffy_api.common.util import validate_schema
 from diffy_api.schemas import (
     analysis_input_schema,
-    analysis_output_schema,
+    task_output_schema,
 )
 
 mod = Blueprint('analysis', __name__)
@@ -54,7 +54,7 @@ class AnalysisList(Resource):
         data = plugins.get(current_app.config['DIFFY_PERSISTENCE_PLUGIN']).get_all('analysis')
         return data, 200
 
-    @validate_schema(analysis_input_schema, None)
+    @validate_schema(analysis_input_schema, task_output_schema)
     def post(self, data=None):
         """
         .. http:post:: /analysis
@@ -78,7 +78,7 @@ class AnalysisList(Resource):
           :statuscode 403: unauthenticated
         """
         try:
-            return analysis(**data)
+            return async_analysis.queue(**request.json)
         except TargetNotFound as ex:
             return {'message': ex.message}, 404
 

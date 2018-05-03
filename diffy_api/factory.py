@@ -18,7 +18,7 @@ from diffy.config import CONFIG
 from diffy.common.utils import install_plugins
 
 from diffy_api.common.health import mod as health
-from diffy_api.extensions import sentry
+from diffy_api.extensions import sentry, rq
 
 
 DEFAULT_BLUEPRINTS = (
@@ -75,6 +75,7 @@ def configure_extensions(app):
     :param app:
     """
     sentry.init_app(app)
+    rq.init_app(app)
 
 
 def configure_blueprints(app, blueprints):
