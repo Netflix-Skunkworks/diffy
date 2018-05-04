@@ -1,13 +1,13 @@
+boto3
 click
 click-log
-boto3
-retrying
-swag-client
 fuzzywuzzy
-PyYAML
-python-Levenshtein
-tabulate
 jsondiff
-tabulate
 jsonschema
 marshmallow-jsonschema
+python-dateutil==2.7.2  # For botocore
+python-Levenshtein
+PyYAML
+retrying
+swag-client
+tabulate
