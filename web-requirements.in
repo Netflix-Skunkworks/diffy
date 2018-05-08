@@ -4,3 +4,4 @@ raven[flask]
 flask-restful
 gunicorn
 inflection
+Flask-RQ2

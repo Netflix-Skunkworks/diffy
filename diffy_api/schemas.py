@@ -12,9 +12,10 @@ from diffy.schema import (
     PersistencePluginSchema,
     CollectionPluginSchema,
     PayloadPluginSchema,
-    AnalysisPluginSchema
+    AnalysisPluginSchema,
+    DiffyInputSchema,
+    DiffyOutputSchema
 )
-from diffy_api.common.schema import DiffyInputSchema
 
 
 class BaselineSchema(DiffyInputSchema):
@@ -30,8 +31,21 @@ class AnalysisSchema(BaselineSchema):
     analysis_plugin = fields.Nested(AnalysisPluginSchema, missing={})
 
 
+class TaskOutputSchema(DiffyOutputSchema):
+    id = fields.String(attribute='id')
+    created_at = fields.DateTime()
+    arguments = fields.Dict(attribute='kwargs')
+    status = fields.String(attribute='status')
+
+
+class TaskInputSchema(DiffyInputSchema):
+    id = fields.String(required=True)
+
+
 baseline_input_schema = BaselineSchema()
 baseline_output_schema = BaselineSchema()
 analysis_input_schema = AnalysisSchema()
 analysis_output_schema = AnalysisSchema()
-
+task_output_schema = TaskOutputSchema()
+task_list_output_schema = TaskOutputSchema(many=True)
+task_input_schema = TaskInputSchema()

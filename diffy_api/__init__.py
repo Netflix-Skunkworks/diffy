@@ -14,11 +14,12 @@ from flask import g, request
 from diffy_api import factory
 from diffy_api.baseline.views import mod as baseline_bp
 from diffy_api.analysis.views import mod as analysis_bp
-
+from diffy_api.tasks.views import mod as task_bp
 
 DIFFY_BLUEPRINTS = (
     baseline_bp,
-    analysis_bp
+    analysis_bp,
+    task_bp
 )
 
 

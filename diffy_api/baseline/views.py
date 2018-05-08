@@ -5,16 +5,17 @@
     :license: Apache, see LICENSE for more details.
 .. moduleauthor:: Kevin Glisson <kglisson@netflix.com>
 """
-from flask import Blueprint, current_app
+from flask import Blueprint, current_app, request
 from flask_restful import Api, Resource
 
-from diffy.core import baseline
 from diffy.plugins.base import plugins
 from diffy.exceptions import TargetNotFound
-from diffy_api.common.schema import validate_schema
+from diffy_api.core import async_baseline
+from diffy_api.common.util import validate_schema
 from diffy_api.schemas import (
     baseline_input_schema,
     baseline_output_schema,
+    task_output_schema,
 )
 
 
@@ -54,7 +55,7 @@ class BaselineList(Resource):
         data = plugins.get(current_app.config['DIFFY_PERSISTENCE_PLUGIN']).get_all('baseline')
         return data, 200
 
-    @validate_schema(baseline_input_schema, None)
+    @validate_schema(baseline_input_schema, task_output_schema)
     def post(self, data=None):
         """
         .. http:post:: /baselines
@@ -78,7 +79,7 @@ class BaselineList(Resource):
           :statuscode 403: unauthenticated
         """
         try:
-            return baseline(**data)
+            return async_baseline.queue(**request.json)
         except TargetNotFound as ex:
             return {'message': ex.message}, 404
 

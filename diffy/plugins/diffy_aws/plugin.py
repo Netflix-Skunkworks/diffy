@@ -9,10 +9,11 @@ import logging
 from typing import List
 
 import boto3
-from marshmallow import fields, Schema
+from marshmallow import fields
 
 from diffy.config import CONFIG
 from diffy.exceptions import TargetNotFound
+from diffy.schema import DiffyInputSchema
 from diffy.plugins import diffy_aws as aws
 from diffy.plugins.bases import PersistencePlugin, TargetPlugin, CollectionPlugin
 
@@ -30,7 +31,7 @@ def get_default_aws_account_number() -> dict:
     return sts.get_caller_identity()['Account']
 
 
-class AWSSchema(Schema):
+class AWSSchema(DiffyInputSchema):
     account_number = fields.String(default=get_default_aws_account_number, missing=get_default_aws_account_number)
     region = fields.String(default=CONFIG['DIFFY_DEFAULT_REGION'], missing=CONFIG['DIFFY_DEFAULT_REGION'])
 
