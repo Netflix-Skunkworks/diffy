@@ -52,6 +52,7 @@ setup(
     tests_require=['pytest', 'moto'],
     extras_require={
         'dev': load_requirements('dev-requirements.txt'),
+        'web': load_requirements('web-requirements.txt'),
     },
     entry_points={
       'console_scripts': [
