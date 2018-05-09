@@ -33,8 +33,7 @@ Diffy
     :alt: RTD
 
 .. image:: docs/images/diffy.png
-    :scale: 50%
-    :height: 200px
+    :width: 50%
     :align: right
 
 Diffy is a digital forensics and incident response (DFIR) tool developed by
