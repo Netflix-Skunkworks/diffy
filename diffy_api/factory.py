@@ -63,6 +63,10 @@ def configure_app(app, config=None):
     :return:
     """
     install_plugins()
+
+    if config:
+        CONFIG.from_yaml(config)
+
     app.config.update(CONFIG)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
