@@ -34,6 +34,7 @@ Diffy
 
 .. image:: docs/images/diffy.png
     :scale: 50%
+    :height: 200px
     :align: right
 
 Diffy is a digital forensics and incident response (DFIR) tool developed by
