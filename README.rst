@@ -32,6 +32,10 @@ Diffy
     :target: https://readthedocs.org/projects/diffy/badge/?version=latest
     :alt: RTD
 
+.. image:: docs/images/diffy.png
+    :scale: 50%
+    :align: right
+
 Diffy is a digital forensics and incident response (DFIR) tool developed by
 Netflix's Security Intelligence and Response Team (SIRT). 
 
