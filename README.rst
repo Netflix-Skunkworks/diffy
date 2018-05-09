@@ -1,6 +1,9 @@
 Diffy
 =====
 
+.. image:: docs/images/diffy_small.png
+    :align: right
+
 .. image:: https://img.shields.io/travis/liiight/diffy/master.svg?style=flat-square
     :target: https://travis-ci.org/Netflix-Skunkworks/diffy
     :alt: Travis CI
@@ -31,6 +34,7 @@ Diffy
 .. image:: https://img.shields.io/readthedocs/diffy.svg?style=flat-square
     :target: https://readthedocs.org/projects/diffy/badge/?version=latest
     :alt: RTD
+
 
 Diffy is a digital forensics and incident response (DFIR) tool developed by
 Netflix's Security Intelligence and Response Team (SIRT). 
