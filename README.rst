@@ -32,8 +32,7 @@ Diffy
     :target: https://readthedocs.org/projects/diffy/badge/?version=latest
     :alt: RTD
 
-.. image:: docs/images/diffy.png
-    :width: 50%
+.. image:: docs/images/diffy_small.png
     :align: right
 
 Diffy is a digital forensics and incident response (DFIR) tool developed by
