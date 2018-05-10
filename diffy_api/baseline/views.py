@@ -79,7 +79,7 @@ class BaselineList(Resource):
           :statuscode 403: unauthenticated
         """
         try:
-            return async_baseline.queue(**request.json)
+            return async_baseline.queue(request.json)
         except TargetNotFound as ex:
             return {'message': ex.message}, 404
 

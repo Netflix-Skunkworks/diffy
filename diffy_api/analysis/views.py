@@ -78,7 +78,7 @@ class AnalysisList(Resource):
           :statuscode 403: unauthenticated
         """
         try:
-            return async_analysis.queue(**request.json)
+            return async_analysis.queue(request.json)
         except TargetNotFound as ex:
             return {'message': ex.message}, 404
 
