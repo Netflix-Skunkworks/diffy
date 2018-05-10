@@ -207,6 +207,8 @@ DEFAULTS = {
     'SWAG_TYPE': 's3',
     'SWAG_BUCKET_NAME': None,
     'SWAG_DATA_FILE': 'v2/accounts.json',
+    'RQ_REDIS_URL': None,
+    'LOG_FILE': None,
 }
 
 
