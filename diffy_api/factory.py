@@ -14,7 +14,7 @@ from logging.handlers import RotatingFileHandler
 
 from flask import Flask
 
-from diffy.config import CONFIG
+from diffy.config import Config, consume_envvars, DEFAULTS
 from diffy.common.utils import install_plugins
 
 from diffy_api.common.health import mod as health
@@ -64,10 +64,13 @@ def configure_app(app, config=None):
     """
     install_plugins()
 
-    if config:
-        CONFIG.from_yaml(config)
+    _defaults = consume_envvars(DEFAULTS)
+    default_config = Config(defaults=_defaults)
 
-    app.config.update(CONFIG)
+    if config:
+        default_config.from_yaml(config)
+
+    app.config.update(default_config)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
