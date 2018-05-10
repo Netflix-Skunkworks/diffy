@@ -103,17 +103,24 @@ def configure_logging(app):
 
     :param app:
     """
-    handler = RotatingFileHandler(app.config.get('LOG_FILE', 'diffy.log'), maxBytes=10000000, backupCount=100)
+    if app.config.get('LOG_FILE'):
+        handler = RotatingFileHandler(app.config.get('LOG_FILE'), maxBytes=10000000, backupCount=100)
 
-    handler.setFormatter(Formatter(
+        handler.setFormatter(Formatter(
+            '%(asctime)s %(levelname)s: %(message)s '
+            '[in %(pathname)s:%(lineno)d]'
+        ))
+
+        handler.setLevel(app.config.get('LOG_LEVEL', 'DEBUG'))
+        app.logger.setLevel(app.config.get('LOG_LEVEL', 'DEBUG'))
+        app.logger.addHandler(handler)
+
+    stream_handler = StreamHandler()
+
+    stream_handler.setFormatter(Formatter(
         '%(asctime)s %(levelname)s: %(message)s '
         '[in %(pathname)s:%(lineno)d]'
     ))
 
-    handler.setLevel(app.config.get('LOG_LEVEL', 'DEBUG'))
-    app.logger.setLevel(app.config.get('LOG_LEVEL', 'DEBUG'))
-    app.logger.addHandler(handler)
-
-    stream_handler = StreamHandler()
     stream_handler.setLevel(app.config.get('LOG_LEVEL', 'DEBUG'))
     app.logger.addHandler(stream_handler)
