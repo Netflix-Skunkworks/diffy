@@ -13,6 +13,7 @@ from typing import List
 from jsondiff import diff
 
 from diffy.config import CONFIG
+from diffy.exceptions import BadArguments
 from diffy.plugins import diffy_local as local
 from diffy.plugins.bases import AnalysisPlugin, PersistencePlugin, PayloadPlugin
 
@@ -42,6 +43,9 @@ class SimpleAnalysisPlugin(AnalysisPlugin):
     def run(self, items: List[dict], **kwargs) -> List[dict]:
         """Run simple difference calculation on results based on a baseline."""
         logger.debug('Performing simple local baseline analysis.')
+
+        if not kwargs.get('baseline'):
+            raise BadArguments('Cannot run simple analysis. No baseline found.')
 
         for i in items:
             i['diff'] = diff(kwargs['baseline']['stdout'], i['stdout'])
