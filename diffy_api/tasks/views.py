@@ -50,7 +50,8 @@ class TaskList(Resource):
           :statuscode 403: unauthenticated
         """
         queue = rq.get_queue()
-        return queue.get_jobs()
+        data = queue.get_jobs()
+        return data, 200
 
 
 class Task(Resource):
