@@ -34,7 +34,7 @@ class AnalysisSchema(BaselineSchema):
 class TaskOutputSchema(DiffyOutputSchema):
     id = fields.String(attribute='id')
     created_at = fields.DateTime()
-    arguments = fields.Dict(attribute='kwargs')
+    args = fields.Dict()
     status = fields.String(attribute='status')
 
 
