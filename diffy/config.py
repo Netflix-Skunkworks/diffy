@@ -9,6 +9,8 @@ import errno
 import yaml
 import logging
 
+from pathlib import Path
+
 from swag_client.util import parse_swag_config_options
 
 from diffy.extensions import swag
@@ -188,7 +190,7 @@ DEFAULTS = {
     'DIFFY_REGIONS': AVAILABLE_REGIONS,
     'DIFFY_DEFAULT_REGION': 'us-west-2',
     'DIFFY_SWAG_ENABLED': False,
-    'DIFFY_LOCAL_FILE_DIRECTORY': os.getcwd(),
+    'DIFFY_LOCAL_FILE_DIRECTORY': Path(__file__).resolve().parent.parent.absolute(),
     'DIFFY_AWS_PERSISTENCE_BUCKET': 'mybucket',
     'DIFFY_AWS_ASSUME_ROLE': 'Diffy',
     'DIFFY_PAYLOAD_LOCAL_COMMANDS': [
