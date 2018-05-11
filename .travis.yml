@@ -11,8 +11,7 @@ cache:
 before_script:
   - pip install --upgrade pip
   - pip install --upgrade setuptools
-  - pip install -r requirements.txt
-  - pip install -r dev-requirements.txt
+  - pip install -e ".[dev]"
 
 script:
   - coverage run -m py.test || exit 1
