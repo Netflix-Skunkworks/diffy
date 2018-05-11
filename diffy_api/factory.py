@@ -9,7 +9,9 @@
 .. moduleauthor:: Kevin Glisson <kglisson@netflix.com>
 
 """
-from logging import Formatter, StreamHandler
+from pprint import pformat
+
+from logging import Formatter, StreamHandler, DEBUG
 from logging.handlers import RotatingFileHandler
 
 from flask import Flask
@@ -50,6 +52,10 @@ def create_app(app_name=None, blueprints=None, config=None):
     configure_blueprints(app, blueprints)
     configure_extensions(app)
     configure_logging(app)
+
+    if app.logger.isEnabledFor(DEBUG):
+        p_config = pformat(app.config)
+        app.logger.debug(f'Current Configuration: {p_config}')
 
     return app
 
