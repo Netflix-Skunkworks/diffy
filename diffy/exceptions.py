@@ -56,6 +56,7 @@ class SchemaError(DiffyException):
        :param args: Exception arguments
        :param kwargs: Exception kwargs
     """
+
     def __init__(self, schema_error, *args, **kwargs):
         kwargs['message'] = f'Schema error: {schema_error}'
         super().__init__(*args, **kwargs)
