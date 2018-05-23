@@ -3,7 +3,6 @@
 bandit
 bumpversion
 codecov
-moto
 mypy
 pip-tools
 pre-commit
