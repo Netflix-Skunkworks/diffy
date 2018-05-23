@@ -150,7 +150,7 @@ Uncertain about how to write tests? Take a look at some existing tests that are
 similar to the code you're changing, and go from there.
 
 You can see a list of open pull requests (pending changes) by visiting
-https://github.com/netflix/diffy/pulls
+https://github.com/Netflix-Skunkworks/diffy/pulls
 
 Pull requests should be against **master** and pass all TravisCI checks.
 
