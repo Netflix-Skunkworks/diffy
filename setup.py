@@ -49,7 +49,7 @@ setup(
     packages=find_packages(exclude=['diffy.tests']),
     include_package_data=True,
     install_requires=load_requirements('requirements.txt'),
-    tests_require=['pytest', 'moto'],
+    tests_require=['pytest'],
     extras_require={
         'dev': load_requirements('dev-requirements.txt'),
         'web': load_requirements('web-requirements.txt'),
