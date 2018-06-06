@@ -13,6 +13,7 @@ before_script:
   - pip install --upgrade setuptools
   - pip install -r requirements.txt
   - pip install -r dev-requirements.txt
+  - pip install -r web-requirements.txt
 
 script:
   - coverage run -m py.test || exit 1
