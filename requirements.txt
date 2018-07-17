@@ -4,25 +4,25 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-boto3==1.7.9
-botocore==1.10.9          # via boto3, s3transfer
-click-log==0.2.1
+boto3==1.7.59
+botocore==1.10.59         # via boto3, s3transfer
+click-log==0.3.2
 click==6.7
 deepdiff==3.3.0           # via swag-client
 docutils==0.14            # via botocore
-dogpile.cache==0.6.4      # via swag-client
+dogpile.cache==0.6.6      # via swag-client
 fuzzywuzzy==0.16.0
 jmespath==0.9.3           # via boto3, botocore, swag-client
-jsondiff==1.1.1
+jsondiff==1.1.2
 jsonpickle==0.9.6         # via deepdiff
 jsonschema==2.6.0
 marshmallow-jsonschema==0.5.0
-marshmallow==2.15.1       # via marshmallow-jsonschema, swag-client
+marshmallow==2.15.3       # via marshmallow-jsonschema, swag-client
 python-dateutil==2.7.2
 python-levenshtein==0.12.0
-pyyaml==3.12
+pyyaml==3.13
 retrying==1.3.3
 s3transfer==0.1.13        # via boto3
 six==1.11.0               # via python-dateutil, retrying
-swag-client==0.3.8
+swag-client==0.4.2
 tabulate==0.8.2

@@ -4,13 +4,13 @@
 #
 #    pip-compile --output-file web-requirements.txt web-requirements.in
 #
-aniso8601==3.0.0          # via flask-restful
+aniso8601==3.0.2          # via flask-restful
 blinker==1.4              # via raven
 boto3==1.7.9
 botocore==1.10.9
 click-log==0.2.1
 click==6.7
-croniter==0.3.20          # via rq-scheduler
+croniter==0.3.24          # via rq-scheduler
 deepdiff==3.3.0
 docutils==0.14
 dogpile.cache==0.6.4
@@ -18,7 +18,7 @@ flask-restful==0.3.6
 flask-rq2==18.0
 flask==1.0.2
 fuzzywuzzy==0.16.0
-gunicorn==19.8.1
+gunicorn==19.9.0
 inflection==0.3.1
 itsdangerous==0.24        # via flask
 jinja2==2.10              # via flask
@@ -31,13 +31,13 @@ marshmallow-jsonschema==0.5.0
 marshmallow==2.15.1
 python-dateutil==2.7.2
 python-levenshtein==0.12.0
-pytz==2018.4              # via flask-restful
+pytz==2018.5              # via flask-restful
 pyyaml==3.12
-raven[flask]==6.7.0
+raven[flask]==6.9.0
 redis==2.10.6             # via rq
 retrying==1.3.3
-rq-scheduler==0.8.2       # via flask-rq2
-rq==0.10.0                # via flask-rq2, rq-scheduler
+rq-scheduler==0.8.3       # via flask-rq2
+rq==0.12.0                # via flask-rq2, rq-scheduler
 s3transfer==0.1.13
 six==1.11.0
 swag-client==0.3.8
