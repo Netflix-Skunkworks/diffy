@@ -3,6 +3,7 @@
 bandit
 bumpversion
 codecov
+-e git+git://github.com/forestmonster/moto@1.3.5#egg=moto
 mypy
 pip-tools
 pre-commit
