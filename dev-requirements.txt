@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file dev-requirements.txt dev-requirements.in
 #
--e git+git://github.com/forestmonster/moto@1.3.5#egg=moto
+-e git+git://github.com/forestmonster/moto@1.3.5#egg=moto-1.3.5
 alabaster==0.7.11         # via sphinx
 aniso8601==3.0.2
 asn1crypto==0.24.0        # via cryptography
