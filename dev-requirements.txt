@@ -84,7 +84,7 @@ pytest-cov==2.5.1
 pytest-flask==0.10.0
 pytest==3.6.3
 python-dateutil==2.7.3
-python-jose==2.0.2
+python-jose==3.0.0
 python-levenshtein==0.12.0
 pytz==2018.5
 pyyaml==3.13
