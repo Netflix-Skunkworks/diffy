@@ -26,7 +26,7 @@ with io.open('README.rst', encoding='utf-8') as readme:
 
 def load_requirements(filename):
     with io.open(filename, encoding='utf-8') as reqfile:
-        return [line.strip() for line in reqfile if not line.startswith('#')]
+        return [line.split()[0] for line in reqfile if not line.startswith('#')]
 
 
 # Populates __version__ without importing the package
