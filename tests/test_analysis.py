@@ -12,7 +12,7 @@ def test_analysis_list_get(client, token, status):
 @pytest.mark.parametrize("token,status", [
     ('', 400)
 ])
-def test_analysis_list_post(client, token, status):
+def test_analysis_list_post(client, token, status, sts):
     assert client.post(api.url_for(AnalysisList), data={}, headers=token).status_code == status
 
 
