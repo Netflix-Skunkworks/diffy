@@ -44,12 +44,12 @@ class IPlugin(local):
     ease of future compatibility.
     """
     # Generic plugin information
-    title: str = None
-    slug: str = None
-    description: str = None
-    version: str = None
-    author: str = None
-    author_url: str = None
+    title: str = ''
+    slug: str = ''
+    description: str = ''
+    version: str = ''
+    author: str = ''
+    author_url: str = ''
     resource_links = ()
 
     _schema: object = None
