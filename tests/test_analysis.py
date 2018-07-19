@@ -38,7 +38,7 @@ def test_analysis_list_patch(client, token, status):
 
 
 @pytest.mark.parametrize("token,status", [
-    ('', 404)
+    ('', 200)
 ])
 def test_analysis_get(client, token, status):
     assert client.get(api.url_for(Analysis, key='foo'), headers=token).status_code == status
