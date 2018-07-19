@@ -38,7 +38,7 @@ class SimpleAnalysisPlugin(AnalysisPlugin):
     version = local.__version__
 
     author = 'Kevin Glisson'
-    author_url = 'https://github.com/netflix/diffy.git'
+    author_url = 'https://github.com/Netflix-Skunkworks/diffy.git'
 
     def run(self, items: List[dict], **kwargs) -> List[dict]:
         """Run simple difference calculation on results based on a baseline."""
@@ -60,7 +60,7 @@ class ClusterAnalysisPlugin(AnalysisPlugin):
     version = local.__version__
 
     author = 'Kevin Glisson'
-    author_url = 'https://github.com/netflix/diffy.git'
+    author_url = 'https://github.com/Netflix-Skunkworks/diffy.git'
 
     def run(self, items: List[dict], **kwargs) -> List[dict]:
         """Run cluster calculation on results based on a baseline."""
@@ -75,7 +75,7 @@ class FilePersistencePlugin(PersistencePlugin):
     version = local.__version__
 
     author = 'Kevin Glisson'
-    author_url = 'https://github.com/netflix/diffy.git'
+    author_url = 'https://github.com/Netflix-Skunkworks/diffy.git'
 
     def get(self, file_type: str, key: str, **kwargs) -> dict:
         """Fetch data from local file system."""
@@ -114,7 +114,7 @@ class CommandPayloadPlugin(PayloadPlugin):
     version = local.__version__
 
     author = 'Kevin Glisson'
-    author_url = 'https://github.com/netflix/diffy.git'
+    author_url = 'https://github.com/Netflix-Skunkworks/diffy.git'
 
     def generate(self, incident: str, **kwargs) -> dict:
         return CONFIG.get('DIFFY_PAYLOAD_LOCAL_COMMANDS')
