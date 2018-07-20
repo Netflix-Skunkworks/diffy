@@ -98,7 +98,7 @@ class IPlugin(local):
         """
         return self.description
 
-    def get_resource_links(self) -> Any[list]:
+    def get_resource_links(self) -> List[Any]:
         """
         Returns a list of tuples pointing to various resources for this plugin.
         >>> def get_resource_links(self):
