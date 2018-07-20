@@ -44,7 +44,7 @@ class OSQueryPayloadPlugin(PayloadPlugin):
         if not key:
             raise BadArguments('DIFFY_PAYLOAD_OSQUERY_KEY required for use with OSQuery plugin.')
 
-        commands = [
+        commands: List[str] = [
             f'export AWS_ACCESS_KEY_ID={creds.access_key}',
             f'export AWS_SECRET_ACCESS_KEY={creds.secret_key}',
             f'export AWS_SESSION_TOKEN={creds.token}',
