@@ -8,6 +8,7 @@ import os
 import errno
 import yaml
 import logging
+from typing import Union, Any, Dict, List, Iterable
 
 from pathlib import Path
 
@@ -185,7 +186,7 @@ class Config(dict):
         return f'<{self.__class__.__name__} {dict.__repr__(self)}>'
 
 
-DEFAULTS = {
+DEFAULTS: Dict[str, Union[Iterable[Any], Path, str, bool, None]] = {
     'DIFFY_ACCOUNTS': [],
     'DIFFY_REGIONS': AVAILABLE_REGIONS,
     'DIFFY_DEFAULT_REGION': 'us-west-2',
@@ -199,7 +200,7 @@ DEFAULTS = {
     'DIFFY_PAYLOAD_OSQUERY_KEY': '',
     'DIFFY_PAYLOAD_OSQUERY_REGION': 'us-west-2',
     'DIFFY_PAYLOAD_OSQUERY_COMMANDS': [
-        './usr/bin/osqueryi --json "SELECT * FROM crontab"'
+        './usr/bin/osqueryi --json "SELECT * FROM crontab"',
     ],
     'DIFFY_PERSISTENCE_PLUGIN': 'local-file',
     'DIFFY_TARGET_PLUGIN': 'auto-scaling-target',

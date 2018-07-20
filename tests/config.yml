@@ -1,0 +1,10 @@
+# General Diffy configuration
+DIFFY_SWAG_ENABLED: True
+SWAG_BUCKET_NAME: example
+
+
+# Plugin specific options
+
+# AWS
+DIFFY_AWS_S3_BUCKET: bucket-blah
+DIFFY_AWS_SSM_IAM_ROLE: DiffyRole

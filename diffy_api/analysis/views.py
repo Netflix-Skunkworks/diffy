@@ -113,7 +113,7 @@ class Analysis(Resource):
         """
         plugin_slug = current_app.config['DIFFY_PERSISTENCE_PLUGIN']
         p = plugins.get(plugin_slug)
-        return p.get(key)
+        return p.get('analysis', key)
 
 
 api.add_resource(AnalysisList, '/analysis', endpoint='analysisList')

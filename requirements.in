@@ -5,7 +5,7 @@ fuzzywuzzy
 jsondiff
 jsonschema
 marshmallow-jsonschema
-python-dateutil==2.7.2  # For botocore
+python-dateutil
 python-Levenshtein
 PyYAML
 retrying

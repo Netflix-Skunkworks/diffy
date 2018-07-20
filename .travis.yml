@@ -4,9 +4,10 @@ matrix:
   include:
     - python: "3.6"
 
-cache:
-  directories:
-    - .pip_download_cache
+cache: pip
+
+install: 
+  - pip install -e git+git://github.com/forestmonster/moto@1.3.5#egg=moto-1.3.5
 
 before_script:
   - pip install --upgrade pip
@@ -15,7 +16,7 @@ before_script:
 
 script:
   - coverage run -m py.test || exit 1
-  - mypy -p diffy --ignore-missing-imports || exit 1
+# - mypy -p diffy --ignore-missing-imports || exit 1
   - bandit -r . -ll -ii -x tests/,docs
 
 after_success:

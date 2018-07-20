@@ -8,7 +8,7 @@
 """
 import logging
 from threading import local
-from typing import List
+from typing import List, Tuple, Optional, Any
 
 from marshmallow_jsonschema import JSONSchema
 
@@ -44,21 +44,21 @@ class IPlugin(local):
     ease of future compatibility.
     """
     # Generic plugin information
-    title: str = None
-    slug: str = None
-    description: str = None
-    version: str = None
-    author: str = None
-    author_url: str = None
+    title: Optional[str] = None
+    slug: Optional[str] = None
+    description: Optional[str] = None
+    version: Optional[str] = None
+    author: Optional[str] = None
+    author_url: Optional[str] = None
     resource_links = ()
 
-    _schema: object = None
+    _schema: Any = None
 
     # Global enabled state
     enabled: bool = True
     can_disable: bool = True
 
-    def validate_options(self, options: dict) -> dict:
+    def validate_options(self, options: dict) -> Any:
         """
         Validates given options against defined schema.
         >>> plugin.validate_options(options)
@@ -83,14 +83,14 @@ class IPlugin(local):
 
         return True
 
-    def get_title(self) -> str:
+    def get_title(self) -> Optional[str]:
         """
         Returns the general title for this plugin.
         >>> plugin.get_title()
         """
         return self.title
 
-    def get_description(self) -> str:
+    def get_description(self) -> Optional[str]:
         """
         Returns the description for this plugin. This is shown on the plugin configuration
         page.
@@ -98,7 +98,7 @@ class IPlugin(local):
         """
         return self.description
 
-    def get_resource_links(self) -> List[tuple]:
+    def get_resource_links(self) -> List[Any]:
         """
         Returns a list of tuples pointing to various resources for this plugin.
         >>> def get_resource_links(self):

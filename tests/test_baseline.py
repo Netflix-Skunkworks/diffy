@@ -13,7 +13,7 @@ def test_baseline_list_get(client, token, status):
 @pytest.mark.parametrize("token,status", [
     ('', 400)
 ])
-def test_baseline_list_post(client, token, status):
+def test_baseline_list_post(client, token, status, sts):
     assert client.post(api.url_for(BaselineList), data={}, headers=token).status_code == status
 
 
@@ -39,7 +39,7 @@ def test_baseline_list_patch(client, token, status):
 
 
 @pytest.mark.parametrize("token,status", [
-    ('', 404)
+    ('', 200)
 ])
 def test_baseline_get(client, token, status):
     assert client.get(api.url_for(Baseline, key='foo'), headers=token).status_code == status
