@@ -102,7 +102,7 @@ snowballstemmer==1.2.1    # via sphinx
 sphinx-autodoc-annotation==1.0.post1
 sphinx==1.7.6
 sphinxcontrib-websupport==1.1.0  # via sphinx
-stevedore==1.28.0         # via bandit
+stevedore==1.29.0         # via bandit
 swag-client==0.4.2
 tabulate==0.8.2
 toml==0.9.4               # via pre-commit
