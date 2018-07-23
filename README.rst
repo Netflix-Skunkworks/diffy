@@ -4,9 +4,8 @@ Diffy
 .. image:: docs/images/diffy_small.png
     :align: right
 
-.. image:: https://img.shields.io/travis/liiight/diffy/master.svg?style=flat-square
+.. image:: https://travis-ci.org/Netflix-Skunkworks/diffy.svg?branch=master
     :target: https://travis-ci.org/Netflix-Skunkworks/diffy
-    :alt: Travis CI
 
 .. image:: https://img.shields.io/codecov/c/github/Netflix-Skunkworks/diffy/master.svg?style=flat-square
     :target: https://codecov.io/gh/Netflix-Skunkworks/diffy
