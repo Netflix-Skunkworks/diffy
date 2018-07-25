@@ -16,9 +16,9 @@ aws-xray-sdk==1.1.2
 babel==2.6.0              # via sphinx
 bandit==1.4.0
 blinker==1.4
-boto3==1.7.63
+boto3==1.7.64
 boto==2.49.0
-botocore==1.10.63
+botocore==1.10.64
 bumpversion==0.5.3
 cached-property==1.4.3    # via pre-commit
 certifi==2018.4.16        # via requests
@@ -48,7 +48,7 @@ fuzzywuzzy==0.16.0
 gitdb2==2.0.4             # via gitpython
 gitpython==2.1.11         # via bandit
 gunicorn==19.9.0
-identify==1.1.3           # via pre-commit
+identify==1.1.4           # via pre-commit
 idna==2.7                 # via cryptography, requests
 imagesize==1.0.0          # via sphinx
 inflection==0.3.1
