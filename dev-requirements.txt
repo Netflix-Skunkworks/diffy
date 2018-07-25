@@ -48,7 +48,7 @@ fuzzywuzzy==0.16.0
 gitdb2==2.0.4             # via gitpython
 gitpython==2.1.11         # via bandit
 gunicorn==19.9.0
-identify==1.1.3           # via pre-commit
+identify==1.1.4           # via pre-commit
 idna==2.7                 # via cryptography, requests
 imagesize==1.0.0          # via sphinx
 inflection==0.3.1
