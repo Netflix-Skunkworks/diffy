@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-boto3==1.7.62
+boto3==1.7.63
 botocore==1.10.63         # via boto3, s3transfer
 click-log==0.3.2
 click==6.7
