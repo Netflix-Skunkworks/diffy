@@ -5,7 +5,7 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 boto3==1.7.62
-botocore==1.10.62         # via boto3, s3transfer
+botocore==1.10.63         # via boto3, s3transfer
 click-log==0.3.2
 click==6.7
 deepdiff==3.3.0           # via swag-client
