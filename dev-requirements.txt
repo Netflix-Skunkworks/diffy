@@ -16,9 +16,9 @@ aws-xray-sdk==1.1.2
 babel==2.6.0              # via sphinx
 bandit==1.4.0
 blinker==1.4
-boto3==1.7.62
+boto3==1.7.63
 boto==2.49.0
-botocore==1.10.62
+botocore==1.10.63
 bumpversion==0.5.3
 cached-property==1.4.3    # via pre-commit
 certifi==2018.4.16        # via requests
@@ -74,10 +74,10 @@ pre-commit-hooks==1.4.0
 pre-commit==1.10.4
 py==1.5.4                 # via pytest
 pyaml==17.12.1
-pycodestyle==2.3.1        # via autopep8, flake8
+pycodestyle==2.4.0        # via autopep8, flake8
 pycparser==2.18           # via cffi
 pycryptodome==3.6.4       # via python-jose
-pyflakes==1.6.0           # via flake8
+pyflakes==2.0.0           # via flake8
 pygments==2.2.0           # via sphinx
 pyparsing==2.2.0          # via packaging
 pytest-cov==2.5.1
