@@ -77,7 +77,7 @@ pyaml==17.12.1
 pycodestyle==2.4.0        # via autopep8, flake8
 pycparser==2.18           # via cffi
 pycryptodome==3.6.4       # via python-jose
-pyflakes==1.6.0           # via flake8
+pyflakes==2.0.0           # via flake8
 pygments==2.2.0           # via sphinx
 pyparsing==2.2.0          # via packaging
 pytest-cov==2.5.1
