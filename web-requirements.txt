@@ -13,7 +13,7 @@ click==6.7
 croniter==0.3.24          # via rq-scheduler
 deepdiff==3.3.0
 docutils==0.14
-dogpile.cache==0.6.6
+dogpile.cache==0.6.7
 flask-restful==0.3.6
 flask-rq2==18.0
 flask==1.0.2
