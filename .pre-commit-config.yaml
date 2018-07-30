@@ -1,5 +1,6 @@
+repos:
 -   repo: git://github.com/pre-commit/pre-commit-hooks
-    sha: v0.9.1
+    rev: v0.9.1
     hooks:
     -   id: check-merge-conflict
     -   id: detect-aws-credentials
