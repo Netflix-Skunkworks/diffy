@@ -82,7 +82,7 @@ pygments==2.2.0           # via sphinx
 pyparsing==2.2.0          # via packaging
 pytest-cov==2.5.1
 pytest-flask==0.10.0
-pytest==3.6.3
+pytest==3.6.4
 python-dateutil==2.7.3
 python-jose==3.0.0
 python-levenshtein==0.12.0
