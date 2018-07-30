@@ -4,13 +4,13 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-boto3==1.7.64
-botocore==1.10.64         # via boto3, s3transfer
+boto3==1.7.65
+botocore==1.10.65         # via boto3, s3transfer
 click-log==0.3.2
 click==6.7
 deepdiff==3.3.0           # via swag-client
 docutils==0.14            # via botocore
-dogpile.cache==0.6.6      # via swag-client
+dogpile.cache==0.6.7      # via swag-client
 fuzzywuzzy==0.16.0
 jmespath==0.9.3           # via boto3, botocore, swag-client
 jsondiff==1.1.2

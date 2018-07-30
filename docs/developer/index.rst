@@ -49,7 +49,7 @@ Once you've got all that, the rest is simple:
 ::
 
     # If you have a fork, you'll want to clone it instead
-    git clone git://github.com/netflix/diffy.git
+    git clone git://github.com/Netflix-Skunkworks/diffy.git
 
     # Create a python virtualenv
     mkvirtualenv diffy
@@ -87,7 +87,7 @@ Once you've got all that, the rest is simple:
 ::
 
     # If you have a fork, you'll want to clone it instead
-    git clone git://github.com/diffy/diffy.git
+    git clone git://github.com/Netflix-Skunkworks/diffy.git
 
     # Create a python virtualenv
     mkvirtualenv diffy
@@ -154,6 +154,14 @@ https://github.com/Netflix-Skunkworks/diffy/pulls
 
 Pull requests should be against **master** and pass all TravisCI checks.
 
+We use `pre-commit hooks`_. Before submitting code, run these:
+
+::
+
+	pre-commit run --all-files
+
+
+.. _pre-commit hooks: https://pre-commit.com/#usage
 
 Writing a Plugin
 ================

@@ -33,7 +33,7 @@ Invoke the command line client with default options, to create a new functional
 baseline. In the command below, replace the ``<asg>`` placeholder with the name of your
 `autoscaling group`_ (a concept particular to AWS)::
 
-    $ diffy new baseline <asg> 
+    $ diffy new baseline <asg>
 
 .. _`autoscaling group`: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html
 

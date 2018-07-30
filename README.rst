@@ -36,7 +36,7 @@ Diffy
 
 
 Diffy is a digital forensics and incident response (DFIR) tool developed by
-Netflix's Security Intelligence and Response Team (SIRT). 
+Netflix's Security Intelligence and Response Team (SIRT).
 
 Diffy allows a forensic investigator to quickly scope a compromise across cloud
 instances during an incident, and triage those instances for followup actions.
@@ -72,7 +72,7 @@ Features
   example, you can use Diffy to tell you which of your instances are listening
   on an unexpected port, are running an unusual process, include a strange
   crontab entry, or have inserted a surprising kernel module.
-- Uses one, or both, of two methods to highlight differences: 
+- Uses one, or both, of two methods to highlight differences:
 
     - Collection of a "functional" baseline from a "clean" running instance,
       against which your instance group is compared, and
