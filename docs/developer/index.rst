@@ -154,7 +154,15 @@ https://github.com/Netflix-Skunkworks/diffy/pulls
 
 Pull requests should be against **master** and pass all TravisCI checks.
 
-We use `pre-commit hooks`_. Before submitting code, run these:
+We use `pre-commit hooks`_ to help us all maintain a consistent standard for
+code. To get started, run:
+
+::
+
+    pre-commit install
+
+
+Before submitting code, run these:
 
 ::
 
