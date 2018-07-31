@@ -63,7 +63,7 @@ marshmallow-jsonschema==0.5.0
 marshmallow==2.15.3
 mccabe==0.6.1             # via flake8
 mock==2.0.0
-more-itertools==4.2.0     # via pytest
+more-itertools==4.3.0     # via pytest
 mypy==0.620
 nodeenv==1.3.2            # via pre-commit
 packaging==17.1           # via sphinx
