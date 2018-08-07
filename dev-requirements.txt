@@ -30,7 +30,7 @@ click==6.7
 codecov==2.0.15
 cookies==2.2.1            # via responses
 coverage==4.5.1           # via codecov, pytest-cov
-croniter==0.3.24
+croniter==0.3.25
 cryptography==2.3
 deepdiff==3.3.0
 docker-pycreds==0.3.0     # via docker
