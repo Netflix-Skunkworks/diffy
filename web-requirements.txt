@@ -10,7 +10,7 @@ boto3==1.7.75
 botocore==1.10.75
 click-log==0.3.2
 click==6.7
-croniter==0.3.24          # via rq-scheduler
+croniter==0.3.25          # via rq-scheduler
 deepdiff==3.3.0
 docutils==0.14
 dogpile.cache==0.6.7
