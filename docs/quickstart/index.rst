@@ -11,7 +11,7 @@ environment.
 
 Clone the repo::
 
-    $ git clone git@github.com:Netflix-Skunkworks/diffy.git && cd giffy
+    $ git clone git@github.com:Netflix-Skunkworks/diffy.git && cd diffy
 
 Install a virtualenv there::
 
