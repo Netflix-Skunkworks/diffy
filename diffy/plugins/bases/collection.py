@@ -15,4 +15,3 @@ class CollectionPlugin(Plugin):
 
     def get(self, targets, incident, commands, **kwargs):
         raise NotImplementedError
-
