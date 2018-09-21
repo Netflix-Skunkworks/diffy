@@ -17,7 +17,7 @@ jsondiff==1.1.2
 jsonpickle==0.9.6         # via deepdiff
 jsonschema==2.6.0
 marshmallow-jsonschema==0.5.0
-marshmallow==2.15.4       # via marshmallow-jsonschema, swag-client
+marshmallow==2.15.6       # via marshmallow-jsonschema, swag-client
 python-dateutil==2.7.3
 python-levenshtein==0.12.0
 pyyaml==3.13
