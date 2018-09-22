@@ -71,7 +71,7 @@ pbr==4.2.0                # via mock, stevedore
 pip-tools==2.0.2
 pluggy==0.7.1             # via pytest
 pre-commit-hooks==1.4.0
-pre-commit==1.10.5
+pre-commit==1.11.1
 py==1.5.4                 # via pytest
 pyaml==17.12.1
 pycodestyle==2.4.0        # via autopep8, flake8
