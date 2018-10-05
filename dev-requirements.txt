@@ -79,7 +79,7 @@ pycparser==2.18           # via cffi
 pycryptodome==3.6.4       # via python-jose
 pyflakes==2.0.0           # via flake8
 pygments==2.2.0           # via sphinx
-pyparsing==2.2.0          # via packaging
+pyparsing==2.2.2          # via packaging
 pytest-cov==2.5.1
 pytest-flask==0.13.0
 pytest==3.7.1
