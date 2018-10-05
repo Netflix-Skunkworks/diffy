@@ -100,7 +100,7 @@ six==1.11.0
 smmap2==2.0.4             # via gitdb2
 snowballstemmer==1.2.1    # via sphinx
 sphinx-autodoc-annotation==1.0.post1
-sphinx==1.7.6
+sphinx==1.8.1
 sphinxcontrib-websupport==1.1.0  # via sphinx
 stevedore==1.29.0         # via bandit
 swag-client==0.4.2
