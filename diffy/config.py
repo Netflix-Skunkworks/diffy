@@ -8,7 +8,7 @@ import os
 import errno
 import yaml
 import logging
-from typing import Union, Any, Dict, List, Iterable
+from typing import Union, Any, Dict, Iterable
 
 from pathlib import Path
 
@@ -219,4 +219,3 @@ DEFAULTS: Dict[str, Union[Iterable[Any], Path, str, bool, None]] = {
 _defaults = consume_envvars(DEFAULTS)
 
 CONFIG = Config(defaults=_defaults)
-
