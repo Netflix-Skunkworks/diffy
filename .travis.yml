@@ -6,6 +6,9 @@ matrix:
 
 cache: pip
 
+before_install:
+  - sudo rm -f /etc/boto.cfg
+
 install:
   - pip install -e git+git://github.com/forestmonster/moto@1.3.5#egg=moto-1.3.5
 
