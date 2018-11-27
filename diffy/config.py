@@ -8,7 +8,7 @@ import os
 import errno
 import yaml
 import logging
-from typing import Union, Any, Dict, List, Iterable
+from typing import Union, Any, Dict, Iterable
 
 from pathlib import Path
 
@@ -201,6 +201,7 @@ DEFAULTS: Dict[str, Union[Iterable[Any], Path, str, bool, None]] = {
     'DIFFY_PAYLOAD_OSQUERY_REGION': 'us-west-2',
     'DIFFY_PAYLOAD_OSQUERY_COMMANDS': [
         './usr/bin/osqueryi --json "SELECT * FROM crontab"',
+        './usr/bin/osqueryi --json "SELECT address, port, name, pid, cmdline FROM listening_ports, processes USING (pid) WHERE protocol = 6 and family = 2 AND address NOT LIKE \'127.0.0.%\'"'
     ],
     'DIFFY_PERSISTENCE_PLUGIN': 'local-file',
     'DIFFY_TARGET_PLUGIN': 'auto-scaling-target',
@@ -219,4 +220,3 @@ DEFAULTS: Dict[str, Union[Iterable[Any], Path, str, bool, None]] = {
 _defaults = consume_envvars(DEFAULTS)
 
 CONFIG = Config(defaults=_defaults)
-
