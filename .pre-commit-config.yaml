@@ -3,7 +3,7 @@ repos:
     rev: v1.4.0
     hooks:
     -   id: check-merge-conflict
+    -   id: detect-private-key
     -   id: flake8
+    -   id: requirements-txt-fixer
     -   id: trailing-whitespace
-      #-   id: detect-aws-credentials
-      #-   args: [allow-missing-credentials]
