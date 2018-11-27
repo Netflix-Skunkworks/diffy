@@ -63,7 +63,7 @@ class BaselineList(Resource):
 
           **Example request**:
           .. sourcecode:: http
-             GET /baselines HTTP/1.1
+             POST /baselines HTTP/1.1
              Host: example.com
              Accept: application/json, text/javascript
 
