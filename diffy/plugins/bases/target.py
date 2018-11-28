@@ -15,4 +15,3 @@ class TargetPlugin(Plugin):
 
     def get(self, key, **kwargs):
         raise NotImplementedError
-

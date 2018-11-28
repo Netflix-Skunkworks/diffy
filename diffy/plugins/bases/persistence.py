@@ -21,4 +21,3 @@ class PersistencePlugin(Plugin):
 
     def save(self, file_type, key, item, **kwargs):
         raise NotImplementedError
-
