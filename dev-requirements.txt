@@ -34,7 +34,7 @@ croniter==0.3.25
 cryptography==2.3
 deepdiff==3.3.0
 docker-pycreds==0.3.0     # via docker
-docker==3.4.1
+docker==3.6.0
 docutils==0.14
 dogpile.cache==0.6.7
 ecdsa==0.13               # via python-jose
