@@ -18,10 +18,10 @@ bandit==1.4.0
 blinker==1.4
 boto3==1.7.75
 boto==2.49.0
-botocore==1.10.75
+botocore==1.12.56
 bumpversion==0.5.3
 cached-property==1.4.3    # via pre-commit
-certifi==2018.4.16        # via requests
+certifi==2018.11.29        # via requests
 cffi==1.11.5              # via cryptography
 cfgv==1.1.0               # via pre-commit
 chardet==3.0.4            # via requests
@@ -31,17 +31,17 @@ codecov==2.0.15
 cookies==2.2.1            # via responses
 coverage==4.5.1           # via codecov, pytest-cov
 croniter==0.3.25
-cryptography==2.3
+cryptography==2.4.2
 deepdiff==3.3.0
-docker-pycreds==0.3.0     # via docker
-docker==3.4.1
+docker-pycreds==0.4.0     # via docker
+docker==3.6.0
 docutils==0.14
 dogpile.cache==0.6.7
 ecdsa==0.13               # via python-jose
 first==2.0.1              # via pip-tools
 flake8==3.5.0             # via pre-commit-hooks
 flask-restful==0.3.6
-flask-rq2==18.1
+flask-rq2==18.2.1
 flask==1.0.2
 future==0.16.0            # via python-jose
 fuzzywuzzy==0.16.0
@@ -76,7 +76,7 @@ py==1.5.4                 # via pytest
 pyaml==17.12.1
 pycodestyle==2.4.0        # via autopep8, flake8
 pycparser==2.19           # via cffi
-pycryptodome==3.6.4       # via python-jose
+pycryptodome==3.7.2       # via python-jose
 pyflakes==2.0.0           # via flake8
 pygments==2.2.0           # via sphinx
 pyparsing==2.2.2          # via packaging
