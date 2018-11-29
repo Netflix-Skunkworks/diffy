@@ -6,6 +6,7 @@
 .. moduleauthor:: Kevin Glisson <kglisson@netflix.com>
 """
 import os
+import subprocess
 import json
 import logging
 from typing import List
@@ -15,7 +16,7 @@ from jsondiff import diff
 from diffy.config import CONFIG
 from diffy.exceptions import BadArguments
 from diffy.plugins import diffy_local as local
-from diffy.plugins.bases import AnalysisPlugin, PersistencePlugin, PayloadPlugin
+from diffy.plugins.bases import AnalysisPlugin, PersistencePlugin, PayloadPlugin, CollectionPlugin, TargetPlugin
 
 
 logger = logging.getLogger(__name__)
@@ -118,3 +119,35 @@ class CommandPayloadPlugin(PayloadPlugin):
 
     def generate(self, incident: str, **kwargs) -> dict:
         return CONFIG.get('DIFFY_PAYLOAD_LOCAL_COMMANDS')
+
+
+class LocalCollectionPlugin(CollectionPlugin):
+    title = 'command'
+    slug = 'local-collection'
+    description = 'Executes payload commands via local shell.'
+    version = local.__version__
+
+    author = 'Alex Maestretti'
+    author_url = 'https://github.com/Netflix-Skunkworks/diffy.git'
+
+    def get(self, targets: List[str], commands: List[str], **kwargs) -> dict:
+        """Queries local system target via subprocess shell."""
+        logger.debug(f'Querying local system')
+        results = ''
+        for i in commands:
+            process_result = subprocess.run(i, capture_output=True)
+            results += process_result.stdout
+        return results
+
+
+class LocalTargetPlugin(TargetPlugin):
+    title = 'command'
+    slug = 'local-target'
+    description = 'Targets the local system for collection.'
+    version = local.__version__
+
+    author = 'Alex Maestretti'
+    author_url = 'https://github.com/Netflix-Skunkworks/diffy.git'
+
+    def get(self, key, **kwargs):
+        return 'local'  # returns arbitrary value that is ignored by local-collection
