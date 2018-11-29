@@ -21,7 +21,7 @@ boto==2.49.0
 botocore==1.10.75
 bumpversion==0.5.3
 cached-property==1.4.3    # via pre-commit
-certifi==2018.4.16        # via requests
+certifi==2018.11.29        # via requests
 cffi==1.11.5              # via cryptography
 cfgv==1.1.0               # via pre-commit
 chardet==3.0.4            # via requests
