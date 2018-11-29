@@ -5,7 +5,9 @@
     :license: Apache, see LICENSE for more details.
 """
 from raven.contrib.flask import Sentry
+
 sentry = Sentry()
 
 from flask_rq2 import RQ
+
 rq = RQ()

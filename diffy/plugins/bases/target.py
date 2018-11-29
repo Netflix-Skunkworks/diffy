@@ -10,7 +10,7 @@ from diffy.schema import PluginOptionSchema
 
 
 class TargetPlugin(Plugin):
-    type = 'target'
+    type = "target"
     _schema = PluginOptionSchema
 
     def get(self, key, **kwargs):

@@ -14,7 +14,7 @@ from diffy.schema import (
     PayloadPluginSchema,
     AnalysisPluginSchema,
     DiffyInputSchema,
-    DiffyOutputSchema
+    DiffyOutputSchema,
 )
 
 
@@ -32,10 +32,10 @@ class AnalysisSchema(BaselineSchema):
 
 
 class TaskOutputSchema(DiffyOutputSchema):
-    id = fields.String(attribute='id')
+    id = fields.String(attribute="id")
     created_at = fields.DateTime()
     args = fields.Dict()
-    status = fields.String(attribute='status')
+    status = fields.String(attribute="status")
 
 
 class TaskInputSchema(DiffyInputSchema):

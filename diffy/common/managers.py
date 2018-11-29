@@ -53,7 +53,7 @@ class InstanceManager(object):
 
         results = []
         for cls_path in class_list:
-            module_name, class_name = cls_path.rsplit('.', 1)
+            module_name, class_name = cls_path.rsplit(".", 1)
             try:
                 module = __import__(module_name, {}, {}, class_name)
                 cls = getattr(module, class_name)
@@ -66,7 +66,7 @@ class InstanceManager(object):
                 logger.warning(f"Plugin '{class_name}' may not work correctly. {e}")
 
             except Exception as e:
-                logger.exception(f'Unable to import {cls_path}. Reason: {e}')
+                logger.exception(f"Unable to import {cls_path}. Reason: {e}")
                 continue
 
         self.cache = results

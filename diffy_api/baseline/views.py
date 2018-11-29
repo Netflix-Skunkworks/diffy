@@ -19,7 +19,7 @@ from diffy_api.schemas import (
 )
 
 
-mod = Blueprint('baselines', __name__)
+mod = Blueprint("baselines", __name__)
 api = Api(mod)
 
 
@@ -52,7 +52,9 @@ class BaselineList(Resource):
           :statuscode 200: no error
           :statuscode 403: unauthenticated
         """
-        data = plugins.get(current_app.config['DIFFY_PERSISTENCE_PLUGIN']).get_all('baseline')
+        data = plugins.get(current_app.config["DIFFY_PERSISTENCE_PLUGIN"]).get_all(
+            "baseline"
+        )
         return data, 200
 
     @validate_schema(baseline_input_schema, task_output_schema)
@@ -81,7 +83,7 @@ class BaselineList(Resource):
         try:
             return async_baseline.queue(request.json)
         except TargetNotFound as ex:
-            return {'message': ex.message}, 404
+            return {"message": ex.message}, 404
 
 
 class Baseline(Resource):
@@ -112,8 +114,10 @@ class Baseline(Resource):
           :statuscode 200: no error
           :statuscode 403: unauthenticated
         """
-        return plugins.get(current_app.config['DIFFY_PERSISTENCE_PLUGIN']).get('baseline', key)
+        return plugins.get(current_app.config["DIFFY_PERSISTENCE_PLUGIN"]).get(
+            "baseline", key
+        )
 
 
-api.add_resource(Baseline, '/baselines/<key>')
-api.add_resource(BaselineList, '/baselines', endpoint='baselines')
+api.add_resource(Baseline, "/baselines/<key>")
+api.add_resource(BaselineList, "/baselines", endpoint="baselines")

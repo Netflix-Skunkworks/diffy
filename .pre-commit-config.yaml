@@ -4,9 +4,7 @@ repos:
     hooks:
     -   id: check-merge-conflict
     -   id: detect-private-key
-    -   id: flake8
     -   id: requirements-txt-fixer
-    -   id: trailing-whitespace
 -   repo: https://github.com/ambv/black
     rev: stable
     hooks:

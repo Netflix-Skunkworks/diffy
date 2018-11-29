@@ -10,7 +10,7 @@ from diffy.schema import PluginOptionSchema
 
 
 class PersistencePlugin(Plugin):
-    type = 'persistence'
+    type = "persistence"
     _schema = PluginOptionSchema
 
     def get(self, file_type, key, **kwargs):

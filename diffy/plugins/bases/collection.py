@@ -10,7 +10,7 @@ from diffy.schema import PluginOptionSchema
 
 
 class CollectionPlugin(Plugin):
-    type = 'collection'
+    type = "collection"
     _schema = PluginOptionSchema
 
     def get(self, targets, incident, commands, **kwargs):

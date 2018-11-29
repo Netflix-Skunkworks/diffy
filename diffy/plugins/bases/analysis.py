@@ -10,7 +10,7 @@ from diffy.schema import PluginOptionSchema
 
 
 class AnalysisPlugin(Plugin):
-    type = 'analysis'
+    type = "analysis"
     _schema = PluginOptionSchema
 
     def run(self, items, **kwargs):
