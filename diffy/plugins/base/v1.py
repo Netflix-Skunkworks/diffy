@@ -25,7 +25,7 @@ class PluginMount(type):
         if new_cls.title is None:
             new_cls.title = new_cls.__name__
         if not new_cls.slug:
-            new_cls.slug = new_cls.title.replace(' ', '-').lower()
+            new_cls.slug = new_cls.title.replace(" ", "-").lower()
         return new_cls
 
 
@@ -43,6 +43,7 @@ class IPlugin(local):
     As a general rule all inherited methods should allow ``**kwargs`` to ensure
     ease of future compatibility.
     """
+
     # Generic plugin information
     title: Optional[str] = None
     slug: Optional[str] = None
@@ -117,5 +118,6 @@ class Plugin(IPlugin):
     control when or how the plugin gets instantiated, nor is it guaranteed that
     it will happen, or happen more than once.
     """
+
     __version__ = 1
     __metaclass__ = PluginMount

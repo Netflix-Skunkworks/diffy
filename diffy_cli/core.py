@@ -16,7 +16,7 @@ from diffy.core import analysis, baseline
 from diffy.exceptions import DiffyException
 from diffy_cli.utils.dynamic_click import CORE_COMMANDS, func_factory, params_factory
 
-log = logging.getLogger('diffy')
+log = logging.getLogger("diffy")
 log.addFilter(AWSFilter())
 
 click_log.basic_config(log)
@@ -32,17 +32,24 @@ def plugin_command_factory():
         group = click.Group(name=plugin_name, help=help)
         for name, description in CORE_COMMANDS.items():
             callback = func_factory(p, name)
-            pretty_opt = click.Option(['--pretty/--not-pretty'], help='Output a pretty version of the JSON')
+            pretty_opt = click.Option(
+                ["--pretty/--not-pretty"], help="Output a pretty version of the JSON"
+            )
             params = [pretty_opt]
-            command = click.Command(name, callback=callback, help=description.format(plugin_name), params=params)
+            command = click.Command(
+                name,
+                callback=callback,
+                help=description.format(plugin_name),
+                params=params,
+            )
             group.add_command(command)
 
         plugins_group.add_command(group)
 
 
 def get_plugin_properties(json_schema):
-    for k, v in json_schema['definitions'].items():
-        return v['properties']
+    for k, v in json_schema["definitions"].items():
+        return v["properties"]
 
 
 def add_plugins_args(f):
@@ -53,7 +60,7 @@ def add_plugins_args(f):
             schemas.append(get_plugin_properties(p.json_schema))
         f.params.extend(params_factory(schemas))
     else:
-        if not hasattr(f, '__click_params__'):
+        if not hasattr(f, "__click_params__"):
             f.__click_params__ = []
 
         for p in plugins.all():
@@ -63,31 +70,37 @@ def add_plugins_args(f):
 
 
 class YAML(click.ParamType):
-    name = 'yaml'
+    name = "yaml"
 
     def convert(self, value: str, param: str, ctx: object) -> dict:
         try:
-            with open(value, 'rb') as f:
+            with open(value, "rb") as f:
                 return yaml.safe_load(f.read())
         except (IOError, OSError) as e:
-            self.fail(f'Could not open file: {value}')
+            self.fail(f"Could not open file: {value}")
 
 
 def get_plugin_callback(ctx: object, param: str, value: str) -> object:
     """Ensures that the plugin selected is available."""
-    for p in plugins.all(plugin_type=param.name.split('_')[0]):
+    for p in plugins.all(plugin_type=param.name.split("_")[0]):
         if p.slug == value:
-            return {'plugin': p, 'options': {}}
+            return {"plugin": p, "options": {}}
 
     raise click.BadParameter(
-        f'Could not find appropriate plugin. Param: {param.name} Value: {value}'
+        f"Could not find appropriate plugin. Param: {param.name} Value: {value}"
     )
 
 
 @click.group()
 @click_log.simple_verbosity_option(log)
-@click.option('--config', type=YAML(), help='Configuration file to use.')
-@click.option('--dry-run', type=bool, default=False, is_flag=True, help='Run command without persisting anything.')
+@click.option("--config", type=YAML(), help="Configuration file to use.")
+@click.option(
+    "--dry-run",
+    type=bool,
+    default=False,
+    is_flag=True,
+    help="Run command without persisting anything.",
+)
 @click.version_option(version=__version__)
 @click.pass_context
 def diffy_cli(ctx, config, dry_run):
@@ -103,18 +116,20 @@ def diffy_cli(ctx, config, dry_run):
 #    log.debug(f'Current context. DryRun: {ctx.dry_run} Config: {json.dumps(CONFIG, indent=2)}')
 
 
-@diffy_cli.group('plugins')
+@diffy_cli.group("plugins")
 def plugins_group():
     pass
 
 
-@plugins_group.command('list')
+@plugins_group.command("list")
 def list_plugins():
     """Shows all available plugins"""
     table = []
     for p in plugins.all():
         table.append([p.title, p.slug, p.version, p.author, p.description])
-    click.echo(tabulate(table, headers=['Title', 'Slug', 'Version', 'Author', 'Description']))
+    click.echo(
+        tabulate(table, headers=["Title", "Slug", "Version", "Author", "Description"])
+    )
 
 
 @diffy_cli.group()
@@ -130,8 +145,15 @@ def new():
 @click.option('--collection-plugin', default='local-shell-collection', callback=get_plugin_callback)
 @click.option('--incident-id', default='None')
 @add_plugins_args
-def baseline_command(target_key, incident_id, target_plugin, persistence_plugin, collection_plugin, payload_plugin,
-                     **kwargs):
+def baseline_command(
+    target_key,
+    incident_id,
+    target_plugin,
+    persistence_plugin,
+    collection_plugin,
+    payload_plugin,
+    **kwargs,
+):
     """Creates a new baseline based on the given ASG."""
     baselines = baseline(
         target_key,
@@ -140,9 +162,9 @@ def baseline_command(target_key, incident_id, target_plugin, persistence_plugin,
         collection_plugin,
         persistence_plugin,
         incident_id=incident_id,
-        **kwargs
+        **kwargs,
     )
-    click.secho(json.dumps(baselines), fg='green')
+    click.secho(json.dumps(baselines), fg="green")
 
 
 @new.command('analysis')
@@ -164,7 +186,7 @@ def analysis_command(target_key, analysis_plugin, target_plugin, persistence_plu
         collection_plugin,
         persistence_plugin,
         analysis_plugin,
-        **kwargs
+        **kwargs,
     )
 
     for r in result['analysis']:
@@ -174,9 +196,7 @@ def analysis_command(target_key, analysis_plugin, target_plugin, persistence_plu
                 fg='red')
             click.secho(json.dumps(r['diff'], indent=2), fg='red')
         else:
-            click.secho(
-                r['instance_id'] + ': No Differences Found.',
-                fg='green')
+            click.secho(r["instance_id"] + ": No Differences Found.", fg="green")
 
 
 def entry_point():
@@ -184,11 +204,11 @@ def entry_point():
     try:
         configure_swag()
         plugin_command_factory()
-        diffy_cli(obj={'dry_run': True})
+        diffy_cli(obj={"dry_run": True})
     except DiffyException as e:
-        click.secho(f'ERROR: {e.message}', bold=True, fg='red')
+        click.secho(f"ERROR: {e.message}", bold=True, fg="red")
         exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     entry_point()

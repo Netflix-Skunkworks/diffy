@@ -22,11 +22,11 @@ def format_errors(messages: List[str]) -> dict:
 
 
 def wrap_errors(messages):
-    errors = dict(message='Validation Error.')
-    if messages.get('_schema'):
-        errors['reasons'] = {'Schema': {'rule': messages['_schema']}}
+    errors = dict(message="Validation Error.")
+    if messages.get("_schema"):
+        errors["reasons"] = {"Schema": {"rule": messages["_schema"]}}
     else:
-        errors['reasons'] = format_errors(messages)
+        errors["reasons"] = format_errors(messages)
     return errors
 
 
@@ -35,19 +35,19 @@ def unwrap_pagination(data, output_schema):
         return data
 
     if isinstance(data, dict):
-        if 'total' in data.keys():
-            if data.get('total') == 0:
+        if "total" in data.keys():
+            if data.get("total") == 0:
                 return data
 
-            marshaled_data = {'total': data['total']}
-            marshaled_data['items'] = output_schema.dump(data['items'], many=True).data
+            marshaled_data = {"total": data["total"]}
+            marshaled_data["items"] = output_schema.dump(data["items"], many=True).data
             return marshaled_data
 
         return output_schema.dump(data).data
 
     elif isinstance(data, list):
-        marshaled_data = {'total': len(data)}
-        marshaled_data['items'] = output_schema.dump(data, many=True).data
+        marshaled_data = {"total": len(data)}
+        marshaled_data["items"] = output_schema.dump(data, many=True).data
         return marshaled_data
 
     return output_schema.dump(data).data
@@ -68,7 +68,7 @@ def validate_schema(input_schema, output_schema):
                 if errors:
                     return wrap_errors(errors), 400
 
-                kwargs['data'] = data
+                kwargs["data"] = data
 
             try:
                 resp = f(*args, **kwargs)
@@ -86,4 +86,5 @@ def validate_schema(input_schema, output_schema):
             return unwrap_pagination(resp, output_schema), 200
 
         return decorated_function
+
     return decorator

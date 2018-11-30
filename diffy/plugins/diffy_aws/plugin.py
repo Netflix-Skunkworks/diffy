@@ -37,23 +37,28 @@ def get_default_aws_account_number() -> dict:
     return accountId
 
 
+
 class AWSSchema(DiffyInputSchema):
-    account_number = fields.String(default=get_default_aws_account_number, missing=get_default_aws_account_number)
-    region = fields.String(default=CONFIG['DIFFY_DEFAULT_REGION'], missing=CONFIG['DIFFY_DEFAULT_REGION'])
+    account_number = fields.String(
+        default=get_default_aws_account_number, missing=get_default_aws_account_number
+    )
+    region = fields.String(
+        default=CONFIG["DIFFY_DEFAULT_REGION"], missing=CONFIG["DIFFY_DEFAULT_REGION"]
+    )
 
 
 class S3PersistencePlugin(PersistencePlugin):
-    title = 's3'
-    slug = 's3-persistence'
-    description = 'Persist diffy collection results to S3.'
+    title = "s3"
+    slug = "s3-persistence"
+    description = "Persist diffy collection results to S3."
     version = aws.__version__
 
-    author = 'Kevin Glisson'
-    author_url = 'https://github.com/netflix/diffy.git'
+    author = "Kevin Glisson"
+    author_url = "https://github.com/netflix/diffy.git"
 
     def get(self, key: str, **kwargs) -> dict:
         """Fetches a result from S3."""
-        logger.debug(f'Retrieving file from S3. Bucket: {self.bucket_name} Key: {key}')
+        logger.debug(f"Retrieving file from S3. Bucket: {self.bucket_name} Key: {key}")
         return load_file(key)
 
     # TODO
@@ -63,45 +68,55 @@ class S3PersistencePlugin(PersistencePlugin):
 
     def save(self, key: str, item: str, **kwargs) -> dict:
         """Saves a result to S3."""
-        logger.debug(f'Saving file to S3. Bucket: {self.bucket_name} Item: {item}')
+        logger.debug(f"Saving file to S3. Bucket: {self.bucket_name} Item: {item}")
         return save_file(key, item)
 
 
 class AutoScalingTargetPlugin(TargetPlugin):
-    title = 'auto scaling'
-    slug = 'auto-scaling-target'
-    description = 'Uses Auto Scaling Groups to determine which instances to target for analysis'
+    title = "auto scaling"
+    slug = "auto-scaling-target"
+    description = (
+        "Uses Auto Scaling Groups to determine which instances to target for analysis"
+    )
     version = aws.__version__
 
-    author = 'Kevin Glisson'
-    author_url = 'https://github.com/netflix/diffy.git'
+    author = "Kevin Glisson"
+    author_url = "https://github.com/netflix/diffy.git"
 
     _schema = AWSSchema
 
     def get(self, key: str, **kwargs) -> List[str]:
         """Fetches instances to target for collection."""
-        logger.debug(f'Fetching instances for Auto Scaling Group. GroupName: {key}')
-        groups = describe_auto_scaling_group(key, account_number=kwargs['account_number'], region=kwargs['region'])
+        logger.debug(f"Fetching instances for Auto Scaling Group. GroupName: {key}")
+        groups = describe_auto_scaling_group(
+            key, account_number=kwargs["account_number"], region=kwargs["region"]
+        )
         logger.debug(groups)
 
         if not groups:
             raise TargetNotFound(target_key=key, plugin_slug=self.slug, **kwargs)
 
-        return [x['InstanceId'] for x in groups[0]['Instances']]
+        return [x["InstanceId"] for x in groups[0]["Instances"]]
 
 
 class SSMCollectionPlugin(CollectionPlugin):
-    title = 'ssm'
-    slug = 'ssm-collection'
-    description = 'Uses SSM to collection information for analysis.'
+    title = "ssm"
+    slug = "ssm-collection"
+    description = "Uses SSM to collection information for analysis."
     version = aws.__version__
 
-    author = 'Kevin Glisson'
-    author_url = 'https://github.com/netflix/diffy.git'
+    author = "Kevin Glisson"
+    author_url = "https://github.com/netflix/diffy.git"
 
     _schema = AWSSchema
 
     def get(self, targets: List[str], commands: List[str], **kwargs) -> dict:
         """Queries an target via SSM."""
-        logger.debug(f'Querying instances. Instances: {targets}')
-        return process(targets, commands, incident_id=kwargs['incident_id'], account_number=kwargs['account_number'], region=kwargs['region'])
+        logger.debug(f"Querying instances. Instances: {targets}")
+        return process(
+            targets,
+            commands,
+            incident_id=kwargs["incident_id"],
+            account_number=kwargs["account_number"],
+            region=kwargs["region"],
+        )

@@ -18,27 +18,26 @@ class DiffySchema(Schema):
     """
     Base schema from which all diffy schema's inherit
     """
+
     __envelope__ = True
 
     def under(self, data, many=None):
         items = []
         if many:
             for i in data:
-                items.append(
-                    {underscore(key): value for key, value in i.items()}
-                )
+                items.append({underscore(key): value for key, value in i.items()})
             return items
-        return {
-            underscore(key): value
-            for key, value in data.items()
-        }
+        return {underscore(key): value for key, value in data.items()}
 
     def camel(self, data, many=None):
         items = []
         if many:
             for i in data:
                 items.append(
-                    {camelize(key, uppercase_first_letter=False): value for key, value in i.items()}
+                    {
+                        camelize(key, uppercase_first_letter=False): value
+                        for key, value in i.items()
+                    }
                 )
             return items
         return {
@@ -48,8 +47,8 @@ class DiffySchema(Schema):
 
     def wrap_with_envelope(self, data, many):
         if many:
-            if 'total' in self.context.keys():
-                return dict(total=self.context['total'], items=data)
+            if "total" in self.context.keys():
+                return dict(total=self.context["total"], items=data)
         return data
 
 
@@ -68,13 +67,13 @@ class DiffyOutputSchema(DiffySchema):
 
     def unwrap_envelope(self, data, many):
         if many:
-            if data['items']:
-                self.context['total'] = data['total']
+            if data["items"]:
+                self.context["total"] = data["total"]
             else:
-                self.context['total'] = 0
-                data = {'items': []}
+                self.context["total"] = 0
+                data = {"items": []}
 
-            return data['items']
+            return data["items"]
 
         return data
 
@@ -93,7 +92,7 @@ def resolve_plugin_slug(slug):
     plugin = plugins.get(slug)
 
     if not plugin:
-        raise ValidationError(f'Could not find plugin. Slug: {slug}')
+        raise ValidationError(f"Could not find plugin. Slug: {slug}")
 
     return plugin
 
@@ -107,28 +106,46 @@ class PluginSchema(DiffyInputSchema):
 
     @post_load
     def post_load(self, data):
-        data['plugin'] = resolve_plugin_slug(data['slug'])
-        data['options'] = data['plugin'].validate_options(data['options'])
+        data["plugin"] = resolve_plugin_slug(data["slug"])
+        data["options"] = data["plugin"].validate_options(data["options"])
         return data
 
 
 class TargetPluginSchema(PluginSchema):
-    slug = fields.String(missing=CONFIG['DIFFY_TARGET_PLUGIN'], default=CONFIG['DIFFY_TARGET_PLUGIN'], required=True)
+    slug = fields.String(
+        missing=CONFIG["DIFFY_TARGET_PLUGIN"],
+        default=CONFIG["DIFFY_TARGET_PLUGIN"],
+        required=True,
+    )
 
 
 class PersistencePluginSchema(PluginSchema):
-    slug = fields.String(missing=CONFIG['DIFFY_PERSISTENCE_PLUGIN'], default=CONFIG['DIFFY_PERSISTENCE_PLUGIN'], required=True)
+    slug = fields.String(
+        missing=CONFIG["DIFFY_PERSISTENCE_PLUGIN"],
+        default=CONFIG["DIFFY_PERSISTENCE_PLUGIN"],
+        required=True,
+    )
 
 
 class CollectionPluginSchema(PluginSchema):
-    slug = fields.String(missing=CONFIG['DIFFY_COLLECTION_PLUGIN'], default=CONFIG['DIFFY_COLLECTION_PLUGIN'], required=True)
+    slug = fields.String(
+        missing=CONFIG["DIFFY_COLLECTION_PLUGIN"],
+        default=CONFIG["DIFFY_COLLECTION_PLUGIN"],
+        required=True,
+    )
 
 
 class PayloadPluginSchema(PluginSchema):
-    slug = fields.String(missing=CONFIG['DIFFY_PAYLOAD_PLUGIN'], default=CONFIG['DIFFY_PAYLOAD_PLUGIN'], required=True)
+    slug = fields.String(
+        missing=CONFIG["DIFFY_PAYLOAD_PLUGIN"],
+        default=CONFIG["DIFFY_PAYLOAD_PLUGIN"],
+        required=True,
+    )
 
 
 class AnalysisPluginSchema(PluginSchema):
-    slug = fields.String(missing=CONFIG['DIFFY_ANALYSIS_PLUGIN'], default=CONFIG['DIFFY_ANALYSIS_PLUGIN'], required=True)
-
-
+    slug = fields.String(
+        missing=CONFIG["DIFFY_ANALYSIS_PLUGIN"],
+        default=CONFIG["DIFFY_ANALYSIS_PLUGIN"],
+        required=True,
+    )
