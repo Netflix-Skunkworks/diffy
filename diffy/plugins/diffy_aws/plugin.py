@@ -9,7 +9,7 @@ import logging
 from typing import List
 
 import boto3
-from botocore.exceptions import ClientError
+from botocore.exceptions import ClientError, NoCredentialsError
 from marshmallow import fields
 
 from diffy.config import CONFIG
@@ -29,10 +29,10 @@ logger = logging.getLogger(__name__)
 def get_default_aws_account_number() -> dict:
     """Retrieves current account number"""
     sts = boto3.client('sts')
-    accountId = '1234'  #TODO: get a sane default from CONFIG
+    accountId = '1234'
     try:
         accountId = sts.get_caller_identity()['Account']
-    except ClientError as e:
+    except (ClientError, NoCredentialsError) as e:
         logger.debug(f'Failed to get AWS AccountID, using Prod: {e}')
     return accountId
 

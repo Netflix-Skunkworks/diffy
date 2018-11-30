@@ -42,7 +42,7 @@ def analysis(target_key: str,
             items.append(i)
             persistence_plugin['plugin'].save(None, key, i)
 
-    logger.debug('Running analysis.', fg='green')
+    logger.debug('Running analysis.')
 
     results = analysis_plugin['plugin'].run(
         items,
