@@ -33,7 +33,7 @@ def get_default_aws_account_number() -> dict:
     try:
         accountId = sts.get_caller_identity()['Account']
     except ClientError as e:
-        logger.debug('Failed to get AWS AccountID, using Prod: {}'.format(e))
+        logger.debug(f'Failed to get AWS AccountID, using Prod: {e}')
     return accountId
 
 

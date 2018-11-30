@@ -146,17 +146,19 @@ class LocalShellCollectionPlugin(CollectionPlugin):
             ]
         }
         """
-        logger.debug(f'Querying local system')
+        #TODO: check if we are root, warn user if not we may not get a full baseline
         results = {}
         for i in commands:
+            logger.debug('Querying local system with: {}'.format(i))
             # format command which is a string with an osqueryi shell command into a list of args for subprocess
             formatted_cmd = shlex.split(i)
-            process_result = subprocess.run(formatted_cmd, capture_output=True)
+            process_result = subprocess.run(formatted_cmd, capture_output=True, text=True)
             #TODO: check return status and pass stderr if needed
             results[i] = {'instance_id' : 'localhost',
                           'status' : 'success',
                           'collected_at' : datetime.datetime.utcnow(),
                           'stdout' : json.loads(process_result.stdout)}
+            logger.debug(f'Results[{i}] : {format(json.dumps(process_result.stdout, indent=2))}')
         return results
 
 
