@@ -7,6 +7,8 @@
 """
 import os
 import subprocess
+import shlex
+import datetime
 import json
 import logging
 from typing import List
@@ -121,9 +123,9 @@ class CommandPayloadPlugin(PayloadPlugin):
         return CONFIG.get('DIFFY_PAYLOAD_LOCAL_COMMANDS')
 
 
-class LocalCollectionPlugin(CollectionPlugin):
+class LocalShellCollectionPlugin(CollectionPlugin):
     title = 'command'
-    slug = 'local-collection'
+    slug = 'local-shell-collection'
     description = 'Executes payload commands via local shell.'
     version = local.__version__
 
@@ -131,12 +133,30 @@ class LocalCollectionPlugin(CollectionPlugin):
     author_url = 'https://github.com/Netflix-Skunkworks/diffy.git'
 
     def get(self, targets: List[str], commands: List[str], **kwargs) -> dict:
-        """Queries local system target via subprocess shell."""
+        """Queries local system target via subprocess shell.
+
+        :returns command results as dict {
+            'command_id': [
+                {
+                    'instance_id': 'i-123343243',
+                    'status': 'success',
+                    'collected_at' : 'dtg'
+                    'stdout': {json osquery result}
+                }
+            ]
+        }
+        """
         logger.debug(f'Querying local system')
-        results = ''
+        results = {}
         for i in commands:
-            process_result = subprocess.run(i, capture_output=True)
-            results += process_result.stdout
+            # format command which is a string with an osqueryi shell command into a list of args for subprocess
+            formatted_cmd = shlex.split(i)
+            process_result = subprocess.run(formatted_cmd, capture_output=True)
+            #TODO: check return status and pass stderr if needed
+            results[i] = {'instance_id' : 'localhost',
+                          'status' : 'success',
+                          'collected_at' : datetime.datetime.utcnow(),
+                          'stdout' : json.loads(process_result.stdout)}
         return results
 
 

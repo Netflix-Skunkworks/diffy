@@ -124,10 +124,10 @@ def new():
 
 @new.command('baseline')
 @click.argument('target-key')
-@click.option('--target-plugin', default='auto-scaling-target', callback=get_plugin_callback)
+@click.option('--target-plugin', default='local-target', callback=get_plugin_callback)
 @click.option('--persistence-plugin', default='local-file', callback=get_plugin_callback)
 @click.option('--payload-plugin', default='local-command', callback=get_plugin_callback)
-@click.option('--collection-plugin', default='ssm-collection', callback=get_plugin_callback)
+@click.option('--collection-plugin', default='local-shell-collection', callback=get_plugin_callback)
 @click.option('--incident-id', default='None')
 @add_plugins_args
 def baseline_command(target_key, incident_id, target_plugin, persistence_plugin, collection_plugin, payload_plugin,
@@ -150,9 +150,9 @@ def baseline_command(target_key, incident_id, target_plugin, persistence_plugin,
 @click.argument('target-key')
 @click.option('--analysis-plugin', default='local-simple', callback=get_plugin_callback)
 @click.option('--payload-plugin', default='local-command', callback=get_plugin_callback)
-@click.option('--target-plugin', default='auto-scaling-target', callback=get_plugin_callback)
+@click.option('--target-plugin', default='local-target', callback=get_plugin_callback)
 @click.option('--persistence-plugin', default='local-file', callback=get_plugin_callback)
-@click.option('--collection-plugin', default='ssm-collection', callback=get_plugin_callback)
+@click.option('--collection-plugin', default='local-shell-collection', callback=get_plugin_callback)
 @click.option('--incident-id', default='')
 def analysis(target_key, analysis_plugin, target_plugin, persistence_plugin, collection_plugin, payload_plugin,
              incident_id, **kwargs):

@@ -195,7 +195,8 @@ DEFAULTS: Dict[str, Union[Iterable[Any], Path, str, bool, None]] = {
     'DIFFY_AWS_PERSISTENCE_BUCKET': 'mybucket',
     'DIFFY_AWS_ASSUME_ROLE': 'Diffy',
     'DIFFY_PAYLOAD_LOCAL_COMMANDS': [
-        'echo "{\\"Hello\\": \\"world\\"}"'
+        'osqueryi --json "SELECT * FROM crontab"',
+        'osqueryi --json "SELECT address, port, name, pid, cmdline FROM listening_ports, processes USING (pid) WHERE protocol = 6 and family = 2 AND address NOT LIKE \'127.0.0.%\'"'
     ],
     'DIFFY_PAYLOAD_OSQUERY_KEY': '',
     'DIFFY_PAYLOAD_OSQUERY_REGION': 'us-west-2',
