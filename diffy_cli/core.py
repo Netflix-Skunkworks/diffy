@@ -157,19 +157,17 @@ def baseline_command(target_key, incident_id, target_plugin, persistence_plugin,
 def analysis_command(target_key, analysis_plugin, target_plugin, persistence_plugin, collection_plugin, payload_plugin,
              incident_id, **kwargs):
     """Creates a new analysis based on collected data."""
-    #TODO call based on variable names rather than order - some mistakes in here
     result = analysis(
         target_key,
-        #incident_id,
         target_plugin,
         payload_plugin,
-        persistence_plugin,
         collection_plugin,
+        persistence_plugin,
         analysis_plugin,
         **kwargs
     )
 
-    for r in result:
+    for r in result['analysis']:
         if r['diff']:
             click.secho(
                 r['instance_id'] + ': Differences found.',
