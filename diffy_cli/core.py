@@ -137,19 +137,13 @@ def new():
     pass
 
 
-@new.command("baseline")
-@click.argument("target-key")
-@click.option(
-    "--target-plugin", default="auto-scaling-target", callback=get_plugin_callback
-)
-@click.option(
-    "--persistence-plugin", default="local-file", callback=get_plugin_callback
-)
-@click.option("--payload-plugin", default="local-command", callback=get_plugin_callback)
-@click.option(
-    "--collection-plugin", default="ssm-collection", callback=get_plugin_callback
-)
-@click.option("--incident-id", default="None")
+@new.command('baseline')
+@click.argument('target-key')
+@click.option('--target-plugin', default='local-target', callback=get_plugin_callback)
+@click.option('--persistence-plugin', default='local-file', callback=get_plugin_callback)
+@click.option('--payload-plugin', default='local-command', callback=get_plugin_callback)
+@click.option('--collection-plugin', default='local-shell-collection', callback=get_plugin_callback)
+@click.option('--incident-id', default='None')
 @add_plugins_args
 def baseline_command(
     target_key,
@@ -173,47 +167,34 @@ def baseline_command(
     click.secho(json.dumps(baselines), fg="green")
 
 
-@new.command()
+@new.command('analysis')
+@click.argument('target-key')
+@click.option('--analysis-plugin', default='local-simple', callback=get_plugin_callback)
+@click.option('--payload-plugin', default='local-command', callback=get_plugin_callback)
+@click.option('--target-plugin', default='local-target', callback=get_plugin_callback)
+@click.option('--persistence-plugin', default='local-file', callback=get_plugin_callback)
+@click.option('--collection-plugin', default='local-shell-collection', callback=get_plugin_callback)
+@click.option('--incident-id', default='')
 @add_plugins_args
-@click.argument("target-key")
-@click.option("--analysis-plugin", default="local-simple", callback=get_plugin_callback)
-@click.option("--payload-plugin", default="local-command", callback=get_plugin_callback)
-@click.option(
-    "--target-plugin", default="auto-scaling-target", callback=get_plugin_callback
-)
-@click.option(
-    "--persistence-plugin", default="local-file", callback=get_plugin_callback
-)
-@click.option(
-    "--collection-plugin", default="ssm-collection", callback=get_plugin_callback
-)
-@click.option("--incident-id", default="")
-def analysis(
-    target_key,
-    analysis_plugin,
-    target_plugin,
-    persistence_plugin,
-    collection_plugin,
-    payload_plugin,
-    incident_id,
-    **kwargs,
-):
+def analysis_command(target_key, analysis_plugin, target_plugin, persistence_plugin, collection_plugin, payload_plugin,
+                    incident_id, **kwargs):
     """Creates a new analysis based on collected data."""
     result = analysis(
         target_key,
-        incident_id,
         target_plugin,
-        persistence_plugin,
-        collection_plugin,
         payload_plugin,
+        collection_plugin,
+        persistence_plugin,
         analysis_plugin,
         **kwargs,
     )
 
-    for r in result:
-        if r["diff"]:
-            click.secho(r["instance_id"] + ": Differences found.", fg="red")
-            click.secho(json.dumps(r["diff"], indent=2), fg="red")
+    for r in result['analysis']:
+        if r['diff']:
+            click.secho(
+                r['instance_id'] + ': Differences found.',
+                fg='red')
+            click.secho(json.dumps(r['diff'], indent=2), fg='red')
         else:
             click.secho(r["instance_id"] + ": No Differences Found.", fg="green")
 

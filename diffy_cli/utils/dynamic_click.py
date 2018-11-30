@@ -94,7 +94,6 @@ def params_factory(schemas: List[dict]) -> list:
                 option = option()
 
             params.append(option)
-
     return params
 
 

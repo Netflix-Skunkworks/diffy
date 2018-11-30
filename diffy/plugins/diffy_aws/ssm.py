@@ -131,18 +131,18 @@ def retry_pending(exception) -> bool:
 def poll(command_ids: dict, **kwargs) -> dict:
     """Query the SSM endpoint to determine whether a command has completed.
 
-    :returns: List. Results of command(s)
+    :returns: Dict. Results of command(s)
+        command_ids = {
+            'command_id': [
+                {
+                    'instance_id': 'i-123343243',
+                    'status': 'success',
+                    'collected_at' : 'dtg'
+                    'stdout': {}
+                }
+            ]
+        }
     """
-    # e.g.
-    #    command_ids = {
-    #        'command_id': [
-    #            {
-    #                'instance_id': 'i-123343243',
-    #                'status': 'success',
-    #                'stdout': {}
-    #            }
-    #        ]
-    #    }
     for cid, instances in command_ids.items():
         for i in instances:
             response = get_command_invocation(cid, i["instance_id"], **kwargs)

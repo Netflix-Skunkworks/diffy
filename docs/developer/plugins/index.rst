@@ -110,8 +110,22 @@ infrastructure available to you.
 
 The CollectionPlugin requires only one function to be implemented::
 
-    def get(self, targets, incident, command, **kwargs):
-        # run command on targets
+    def get(self, targets, incident, command, **kwargs) --> dict:
+         """Queries system target.
+
+        :returns command results as dict {
+            'command_id': [
+                {
+                    'instance_id': 'i-123343243',
+                    'status': 'success',
+                    'collected_at' : 'datetime'
+                    'stdout': {json osquery result}
+                }
+                ...
+                {additional instances}
+            ]
+        }
+        """
 
 Often times is useful to propagate to external systems why a command is being issued, here diffy will pass a `incident` string
 that allows the origin of the command to be audited.
@@ -127,7 +141,7 @@ Here again the incident is passed to be dynamically included into the commands i
 
 The PayloadPlugin requires only one function to be implemented::
 
-    def generate(self, incident, **kwargs):
+    def generate(self, incident, **kwargs) --> dict:
         # list of commands to be sent to the target
 
 

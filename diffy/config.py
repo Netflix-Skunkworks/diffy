@@ -191,17 +191,20 @@ class Config(dict):
 
 
 DEFAULTS: Dict[str, Union[Iterable[Any], Path, str, bool, None]] = {
-    "DIFFY_ACCOUNTS": [],
-    "DIFFY_REGIONS": AVAILABLE_REGIONS,
-    "DIFFY_DEFAULT_REGION": "us-west-2",
-    "DIFFY_SWAG_ENABLED": False,
-    "DIFFY_LOCAL_FILE_DIRECTORY": Path(__file__).resolve().parent.parent.absolute(),
-    "DIFFY_AWS_PERSISTENCE_BUCKET": "mybucket",
-    "DIFFY_AWS_ASSUME_ROLE": "Diffy",
-    "DIFFY_PAYLOAD_LOCAL_COMMANDS": ['echo "{\\"Hello\\": \\"world\\"}"'],
-    "DIFFY_PAYLOAD_OSQUERY_KEY": "",
-    "DIFFY_PAYLOAD_OSQUERY_REGION": "us-west-2",
-    "DIFFY_PAYLOAD_OSQUERY_COMMANDS": [
+    'DIFFY_ACCOUNTS': [],
+    'DIFFY_REGIONS': AVAILABLE_REGIONS,
+    'DIFFY_DEFAULT_REGION': 'us-west-2',
+    'DIFFY_SWAG_ENABLED': False,
+    'DIFFY_LOCAL_FILE_DIRECTORY': Path(__file__).resolve().parent.parent.absolute(),
+    'DIFFY_AWS_PERSISTENCE_BUCKET': 'mybucket',
+    'DIFFY_AWS_ASSUME_ROLE': 'Diffy',
+    'DIFFY_PAYLOAD_LOCAL_COMMANDS': [
+        'osqueryi --json "SELECT address, port, name, pid, cmdline FROM listening_ports, processes USING (pid) WHERE protocol = 6 and family = 2 AND address NOT LIKE \'127.0.0.%\'"',
+        'osqueryi --json "SELECT * FROM crontab"'
+        ],
+    'DIFFY_PAYLOAD_OSQUERY_KEY': '',
+    'DIFFY_PAYLOAD_OSQUERY_REGION': 'us-west-2',
+    'DIFFY_PAYLOAD_OSQUERY_COMMANDS': [
         './usr/bin/osqueryi --json "SELECT * FROM crontab"',
         "./usr/bin/osqueryi --json \"SELECT address, port, name, pid, cmdline FROM listening_ports, processes USING (pid) WHERE protocol = 6 and family = 2 AND address NOT LIKE '127.0.0.%'\"",
     ],
