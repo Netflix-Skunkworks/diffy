@@ -145,7 +145,7 @@ def baseline_command(target_key, incident_id, target_plugin, persistence_plugin,
     click.secho(json.dumps(baselines), fg='green')
 
 
-@new.command()
+@new.command('analysis')
 @add_plugins_args
 @click.argument('target-key')
 @click.option('--analysis-plugin', default='local-simple', callback=get_plugin_callback)
@@ -154,16 +154,17 @@ def baseline_command(target_key, incident_id, target_plugin, persistence_plugin,
 @click.option('--persistence-plugin', default='local-file', callback=get_plugin_callback)
 @click.option('--collection-plugin', default='local-shell-collection', callback=get_plugin_callback)
 @click.option('--incident-id', default='')
-def analysis(target_key, analysis_plugin, target_plugin, persistence_plugin, collection_plugin, payload_plugin,
+def analysis_command(target_key, analysis_plugin, target_plugin, persistence_plugin, collection_plugin, payload_plugin,
              incident_id, **kwargs):
     """Creates a new analysis based on collected data."""
+    #TODO call based on variable names rather than order - some mistakes in here
     result = analysis(
         target_key,
-        incident_id,
+        #incident_id,
         target_plugin,
+        payload_plugin,
         persistence_plugin,
         collection_plugin,
-        payload_plugin,
         analysis_plugin,
         **kwargs
     )

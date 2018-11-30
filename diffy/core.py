@@ -18,19 +18,19 @@ def analysis(target_key: str,
              analysis_plugin: dict,
              **kwargs) -> dict:
     """Creates a new analysis."""
-    logger.debug(f'Attempting to collect targets. TargetKey: {target_key}')
+    logger.debug(f'Attempting to collect targets with {target_plugin}. TargetKey: {target_key}')
     target_plugin['options'].update(kwargs)
     targets = target_plugin['plugin'].get(target_key, **target_plugin['options'])
 
-    logger.debug('Generating payload.')
+    logger.debug(f'Generating payload with {payload_plugin}')
     payload_plugin['options'].update(kwargs)
     commands = payload_plugin['plugin'].generate(None, **kwargs)
 
-    logger.debug(f'Attempting to collect data from targets. NumberTargets: {len(targets)}')
+    logger.debug(f'Attempting to collect data from targets with {collection_plugin}. NumberTargets: {len(targets)}')
     collection_plugin['options'].update(kwargs)
     results = collection_plugin['plugin'].get(targets, commands, **collection_plugin['options'])
 
-    logger.debug('Persisting result data.')
+    logger.debug(f'Persisting result data with {persistence_plugin}.')
 
     # TODO how does this work for non-local analysis?
     items = []

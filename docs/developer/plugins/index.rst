@@ -114,13 +114,15 @@ The CollectionPlugin requires only one function to be implemented::
          """Queries system target.
 
         :returns command results as dict {
-            'command': [
+            'command_id': [
                 {
                     'instance_id': 'i-123343243',
                     'status': 'success',
                     'collected_at' : 'datetime'
                     'stdout': {json osquery result}
                 }
+                ...
+                {additional instances}
             ]
         }
         """

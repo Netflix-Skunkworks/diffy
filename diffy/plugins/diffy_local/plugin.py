@@ -143,6 +143,7 @@ class LocalShellCollectionPlugin(CollectionPlugin):
                     'collected_at' : 'dtg'
                     'stdout': {json osquery result}
                 }
+                ...
             ]
         }
         """
