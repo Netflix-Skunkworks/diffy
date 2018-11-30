@@ -21,21 +21,21 @@ from distutils.util import strtobool
 logger = logging.getLogger(__name__)
 
 
-AVAILABLE_REGIONS = ['us-east-1', 'us-west-2', 'eu-west-1']
+AVAILABLE_REGIONS = ["us-east-1", "us-west-2", "eu-west-1"]
 
 
 def configure_swag() -> None:
     """Configures SWAG if enabled."""
-    if CONFIG['DIFFY_SWAG_ENABLED']:
-        swag_config = CONFIG.get_namespace('SWAG_')
+    if CONFIG["DIFFY_SWAG_ENABLED"]:
+        swag_config = CONFIG.get_namespace("SWAG_")
         logger.debug(str(swag_config))
-        swag_config = {'swag.' + k: v for k, v in swag_config.items()}
+        swag_config = {"swag." + k: v for k, v in swag_config.items()}
         swag.configure(**parse_swag_config_options(swag_config))
-        CONFIG['DIFFY_ACCOUNTS'] = swag.get_service_enabled('diffy')
+        CONFIG["DIFFY_ACCOUNTS"] = swag.get_service_enabled("diffy")
 
 
 def valid_region(region) -> bool:
-    if region in CONFIG['DIFFY_REGIONS']:
+    if region in CONFIG["DIFFY_REGIONS"]:
         return True
     return False
 
@@ -93,10 +93,12 @@ class Config(dict):
         if not rv:
             if silent:
                 return False
-            raise RuntimeError(f'The environment variable {variable_name} is not set '
-                               'and as such configuration could not be '
-                               'loaded.  Set this variable and make it '
-                               'point to a configuration file')
+            raise RuntimeError(
+                f"The environment variable {variable_name} is not set "
+                "and as such configuration could not be "
+                "loaded.  Set this variable and make it "
+                "point to a configuration file"
+            )
         return self.from_yaml(rv, silent=silent)
 
     def from_yaml(self, filename: str, silent: bool = False) -> bool:
@@ -118,7 +120,7 @@ class Config(dict):
         except IOError as e:
             if silent and e.errno in (errno.ENOENT, errno.EISDIR):
                 return False
-            e.strerror = f'Unable to load configuration file ({e})'
+            e.strerror = f"Unable to load configuration file ({e})"
             raise e
         return self.from_mapping(obj)
 
@@ -127,13 +129,13 @@ class Config(dict):
         keys."""
         mappings = []
         if len(mapping) == 1:
-            if hasattr(mapping[0], 'items'):
+            if hasattr(mapping[0], "items"):
                 mappings.append(mapping[0].items())
             else:
                 mappings.append(mapping[0])
         elif len(mapping) > 1:
             raise TypeError(
-                f'expected at most 1 positional argument, got {len(mapping)}'
+                f"expected at most 1 positional argument, got {len(mapping)}"
             )
         mappings.append(kwargs.items())
         for mapping in mappings:
@@ -142,7 +144,9 @@ class Config(dict):
                     self[key] = value
         return True
 
-    def get_namespace(self, namespace: str, lowercase: bool = True, trim_namespace: bool = True) -> dict:
+    def get_namespace(
+        self, namespace: str, lowercase: bool = True, trim_namespace: bool = True
+    ) -> dict:
         """Returns a dictionary containing a subset of configuration options
         that match the specified namespace/prefix. Example usage::
 
@@ -174,7 +178,7 @@ class Config(dict):
             if not k.startswith(namespace):
                 continue
             if trim_namespace:
-                key = k[len(namespace):]
+                key = k[len(namespace) :]
             else:
                 key = k
             if lowercase:
@@ -183,36 +187,34 @@ class Config(dict):
         return rv
 
     def __repr__(self):
-        return f'<{self.__class__.__name__} {dict.__repr__(self)}>'
+        return f"<{self.__class__.__name__} {dict.__repr__(self)}>"
 
 
 DEFAULTS: Dict[str, Union[Iterable[Any], Path, str, bool, None]] = {
-    'DIFFY_ACCOUNTS': [],
-    'DIFFY_REGIONS': AVAILABLE_REGIONS,
-    'DIFFY_DEFAULT_REGION': 'us-west-2',
-    'DIFFY_SWAG_ENABLED': False,
-    'DIFFY_LOCAL_FILE_DIRECTORY': Path(__file__).resolve().parent.parent.absolute(),
-    'DIFFY_AWS_PERSISTENCE_BUCKET': 'mybucket',
-    'DIFFY_AWS_ASSUME_ROLE': 'Diffy',
-    'DIFFY_PAYLOAD_LOCAL_COMMANDS': [
-        'echo "{\\"Hello\\": \\"world\\"}"'
-    ],
-    'DIFFY_PAYLOAD_OSQUERY_KEY': '',
-    'DIFFY_PAYLOAD_OSQUERY_REGION': 'us-west-2',
-    'DIFFY_PAYLOAD_OSQUERY_COMMANDS': [
+    "DIFFY_ACCOUNTS": [],
+    "DIFFY_REGIONS": AVAILABLE_REGIONS,
+    "DIFFY_DEFAULT_REGION": "us-west-2",
+    "DIFFY_SWAG_ENABLED": False,
+    "DIFFY_LOCAL_FILE_DIRECTORY": Path(__file__).resolve().parent.parent.absolute(),
+    "DIFFY_AWS_PERSISTENCE_BUCKET": "mybucket",
+    "DIFFY_AWS_ASSUME_ROLE": "Diffy",
+    "DIFFY_PAYLOAD_LOCAL_COMMANDS": ['echo "{\\"Hello\\": \\"world\\"}"'],
+    "DIFFY_PAYLOAD_OSQUERY_KEY": "",
+    "DIFFY_PAYLOAD_OSQUERY_REGION": "us-west-2",
+    "DIFFY_PAYLOAD_OSQUERY_COMMANDS": [
         './usr/bin/osqueryi --json "SELECT * FROM crontab"',
-        './usr/bin/osqueryi --json "SELECT address, port, name, pid, cmdline FROM listening_ports, processes USING (pid) WHERE protocol = 6 and family = 2 AND address NOT LIKE \'127.0.0.%\'"'
+        "./usr/bin/osqueryi --json \"SELECT address, port, name, pid, cmdline FROM listening_ports, processes USING (pid) WHERE protocol = 6 and family = 2 AND address NOT LIKE '127.0.0.%'\"",
     ],
-    'DIFFY_PERSISTENCE_PLUGIN': 'local-file',
-    'DIFFY_TARGET_PLUGIN': 'auto-scaling-target',
-    'DIFFY_PAYLOAD_PLUGIN': 'local-command',
-    'DIFFY_COLLECTION_PLUGIN': 'ssm-collection',
-    'DIFFY_ANALYSIS_PLUGIN': 'local-simple',
-    'SWAG_TYPE': 's3',
-    'SWAG_BUCKET_NAME': None,
-    'SWAG_DATA_FILE': 'v2/accounts.json',
-    'RQ_REDIS_URL': None,
-    'LOG_FILE': None,
+    "DIFFY_PERSISTENCE_PLUGIN": "local-file",
+    "DIFFY_TARGET_PLUGIN": "auto-scaling-target",
+    "DIFFY_PAYLOAD_PLUGIN": "local-command",
+    "DIFFY_COLLECTION_PLUGIN": "ssm-collection",
+    "DIFFY_ANALYSIS_PLUGIN": "local-simple",
+    "SWAG_TYPE": "s3",
+    "SWAG_BUCKET_NAME": None,
+    "SWAG_DATA_FILE": "v2/accounts.json",
+    "RQ_REDIS_URL": None,
+    "LOG_FILE": None,
 }
 
 

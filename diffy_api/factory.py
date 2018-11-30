@@ -23,9 +23,7 @@ from diffy_api.common.health import mod as health
 from diffy_api.extensions import sentry, rq
 
 
-DEFAULT_BLUEPRINTS = (
-    health,
-)
+DEFAULT_BLUEPRINTS = (health,)
 
 API_VERSION = 1
 
@@ -55,7 +53,7 @@ def create_app(app_name=None, blueprints=None, config=None):
 
     if app.logger.isEnabledFor(DEBUG):
         p_config = pformat(app.config)
-        app.logger.debug(f'Current Configuration: {p_config}')
+        app.logger.debug(f"Current Configuration: {p_config}")
 
     return app
 
@@ -77,7 +75,7 @@ def configure_app(app, config=None):
         default_config.from_yaml(config)
 
     app.config.update(default_config)
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
 def configure_extensions(app):
@@ -100,7 +98,7 @@ def configure_blueprints(app, blueprints):
     :param blueprints:
     """
     for blueprint in blueprints:
-        app.register_blueprint(blueprint, url_prefix=f'/api/{API_VERSION}')
+        app.register_blueprint(blueprint, url_prefix=f"/api/{API_VERSION}")
 
 
 def configure_logging(app):
@@ -109,24 +107,28 @@ def configure_logging(app):
 
     :param app:
     """
-    if app.config.get('LOG_FILE'):
-        handler = RotatingFileHandler(app.config.get('LOG_FILE'), maxBytes=10000000, backupCount=100)
+    if app.config.get("LOG_FILE"):
+        handler = RotatingFileHandler(
+            app.config.get("LOG_FILE"), maxBytes=10_000_000, backupCount=100
+        )
 
-        handler.setFormatter(Formatter(
-            '%(asctime)s %(levelname)s: %(message)s '
-            '[in %(pathname)s:%(lineno)d]'
-        ))
+        handler.setFormatter(
+            Formatter(
+                "%(asctime)s %(levelname)s: %(message)s " "[in %(pathname)s:%(lineno)d]"
+            )
+        )
 
-        handler.setLevel(app.config.get('LOG_LEVEL', 'DEBUG'))
-        app.logger.setLevel(app.config.get('LOG_LEVEL', 'DEBUG'))
+        handler.setLevel(app.config.get("LOG_LEVEL", "DEBUG"))
+        app.logger.setLevel(app.config.get("LOG_LEVEL", "DEBUG"))
         app.logger.addHandler(handler)
 
     stream_handler = StreamHandler()
 
-    stream_handler.setFormatter(Formatter(
-        '%(asctime)s %(levelname)s: %(message)s '
-        '[in %(pathname)s:%(lineno)d]'
-    ))
+    stream_handler.setFormatter(
+        Formatter(
+            "%(asctime)s %(levelname)s: %(message)s " "[in %(pathname)s:%(lineno)d]"
+        )
+    )
 
-    stream_handler.setLevel(app.config.get('LOG_LEVEL', 'DEBUG'))
+    stream_handler.setLevel(app.config.get("LOG_LEVEL", "DEBUG"))
     app.logger.addHandler(stream_handler)

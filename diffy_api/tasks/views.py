@@ -10,13 +10,10 @@ from flask_restful import Api, Resource
 
 from diffy_api.extensions import rq
 from diffy_api.common.util import validate_schema
-from diffy_api.schemas import (
-    task_output_schema,
-    task_list_output_schema,
-)
+from diffy_api.schemas import task_output_schema, task_list_output_schema
 
 
-mod = Blueprint('tasks', __name__)
+mod = Blueprint("tasks", __name__)
 api = Api(mod)
 
 
@@ -87,5 +84,5 @@ class Task(Resource):
         return queue.fetch_job(task_id)
 
 
-api.add_resource(Task, '/tasks/<task_id>')
-api.add_resource(TaskList, '/tasks', endpoint='tasks')
+api.add_resource(Task, "/tasks/<task_id>")
+api.add_resource(TaskList, "/tasks", endpoint="tasks")
