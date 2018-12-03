@@ -12,11 +12,11 @@ class DiffyException(Exception):
     """Base Diffy exception. Catch this to catch all Diffy related errors."""
 
     def __init__(self, *args, **kwargs):
-        self.message = kwargs.pop('message', None)
+        self.message = kwargs.pop("message", None)
         super().__init__(self.message)
 
     def __repr__(self):
-        return f'<DiffyError: {self.message}>'
+        return f"<DiffyError: {self.message}>"
 
 
 class InvalidConfiguration(DiffyException):
@@ -27,11 +27,11 @@ class InvalidConfiguration(DiffyException):
         :param args: Exception arguments
         :param kwargs: Exception kwargs
         """
-        self.message = kwargs.pop('message', None)
+        self.message = kwargs.pop("message", None)
         super().__init__(self.message)
 
     def __repr__(self):
-        return f'<CofigurationError: {self.message}>'
+        return f"<CofigurationError: {self.message}>"
 
 
 class PendingException(DiffyException):
@@ -42,11 +42,11 @@ class PendingException(DiffyException):
         :param args: Exception arguments
         :param kwargs: Exception kwargs
         """
-        self.message = kwargs.pop('message', None)
+        self.message = kwargs.pop("message", None)
         super().__init__(self.message)
 
     def __repr__(self):
-        return f'<PendingError: {self.message}>'
+        return f"<PendingError: {self.message}>"
 
 
 class SchemaError(DiffyException):
@@ -58,11 +58,11 @@ class SchemaError(DiffyException):
     """
 
     def __init__(self, schema_error, *args, **kwargs):
-        kwargs['message'] = f'Schema error: {schema_error}'
+        kwargs["message"] = f"Schema error: {schema_error}"
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return f'<SchemaError: {self.message}>'
+        return f"<SchemaError: {self.message}>"
 
 
 class BadArguments(DiffyException):
@@ -74,11 +74,11 @@ class BadArguments(DiffyException):
     """
 
     def __init__(self, validation_error, *args, **kwargs):
-        kwargs['message'] = f'Error with sent data: {validation_error}'
+        kwargs["message"] = f"Error with sent data: {validation_error}"
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return f'<BadArgumentError: {self.message}>'
+        return f"<BadArgumentError: {self.message}>"
 
 
 class TargetNotFound(DiffyException):
@@ -91,13 +91,14 @@ class TargetNotFound(DiffyException):
     """
 
     def __init__(self, target_key, plugin_slug, *args, **kwargs):
-        options = ''
+        options = ""
         for k, v in kwargs.items():
-            options += f'{k}: {v} '
+            options += f"{k}: {v} "
 
-        kwargs['message'] = f'Could not find target. key: {target_key} slug: {plugin_slug} {options}'
+        kwargs[
+            "message"
+        ] = f"Could not find target. key: {target_key} slug: {plugin_slug} {options}"
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return f'<TargetNotFoundError: {self.message}>'
-
+        return f"<TargetNotFoundError: {self.message}>"

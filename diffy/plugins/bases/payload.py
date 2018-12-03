@@ -10,7 +10,7 @@ from diffy.schema import PluginOptionSchema
 
 
 class PayloadPlugin(Plugin):
-    type = 'payload'
+    type = "payload"
     _schema = PluginOptionSchema
 
     def generate(self, incident, **kwargs):

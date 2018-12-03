@@ -25,19 +25,21 @@ def retry_throttled(exception):
     """
     logger.debug(exception)
     if isinstance(exception, ClientError):
-        if exception.response['Error']['Code'] == 'ThrottlingException':
+        if exception.response["Error"]["Code"] == "ThrottlingException":
             return True
     return False
 
 
-@sts_client('autoscaling')
-@retry(retry_on_exception=retry_throttled, stop_max_attempt_number=7, wait_exponential_multiplier=1000)
+@sts_client("autoscaling")
+@retry(
+    retry_on_exception=retry_throttled,
+    stop_max_attempt_number=7,
+    wait_exponential_multiplier=1000,
+)
 def describe_auto_scaling_group(group_name: str, **kwargs) -> List[str]:
     """Uses boto to query for command status."""
-    logger.debug(f'Describing autoscaling group. AutoScalingGroupName: {group_name}')
+    logger.debug(f"Describing autoscaling group. AutoScalingGroupName: {group_name}")
 
-    return kwargs['client'].describe_auto_scaling_groups(
-        AutoScalingGroupNames=[
-            group_name
-        ]
-    )['AutoScalingGroups']
+    return kwargs["client"].describe_auto_scaling_groups(
+        AutoScalingGroupNames=[group_name]
+    )["AutoScalingGroups"]

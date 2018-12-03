@@ -77,6 +77,8 @@ setup(
           'local_analysis_cluster = diffy.plugins.diffy_local.plugin:ClusterAnalysisPlugin',
           'local_persistence_file = diffy.plugins.diffy_local.plugin:FilePersistencePlugin',
           'local_payload_command = diffy.plugins.diffy_local.plugin:CommandPayloadPlugin',
+          'local_shell_collection = diffy.plugins.diffy_local.plugin:LocalShellCollectionPlugin',
+          'local_target = diffy.plugins.diffy_local.plugin:LocalTargetPlugin',
           'osquery_payload = diffy.plugins.diffy_osquery.plugin:OSQueryPayloadPlugin'
       ]
     },

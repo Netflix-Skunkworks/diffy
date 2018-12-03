@@ -5,7 +5,5 @@
     :license: Apache, see LICENSE for more details.
 """
 from swag_client.backend import SWAGManager
+
 swag = SWAGManager()
-
-
-

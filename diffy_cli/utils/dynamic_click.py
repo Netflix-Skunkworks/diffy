@@ -4,13 +4,17 @@ from typing import List
 
 import click
 
-from diffy_cli.utils.json_schema import COMPLEX_TYPES, json_schema_to_click_type, handle_oneof
+from diffy_cli.utils.json_schema import (
+    COMPLEX_TYPES,
+    json_schema_to_click_type,
+    handle_oneof,
+)
 
 CORE_COMMANDS = {
-    'required': "'{}' required schema",
-    'schema': "'{}' full schema",
-    'metadata': "'{}' metadata",
-    'defaults': "'{}' default values"
+    "required": "'{}' required schema",
+    "schema": "'{}' full schema",
+    "metadata": "'{}' metadata",
+    "defaults": "'{}' default values",
 }
 
 
@@ -34,19 +38,21 @@ def params_factory(schemas: List[dict]) -> list:
             multiple = False
             choices = None
 
-            if any(char in prpty for char in ['@']):
+            if any(char in prpty for char in ["@"]):
                 continue
 
-            if prpty_schema.get('type') in COMPLEX_TYPES:
+            if prpty_schema.get("type") in COMPLEX_TYPES:
                 continue
 
-            if prpty_schema.get('duplicate'):
+            if prpty_schema.get("duplicate"):
                 continue
 
-            elif not prpty_schema.get('oneOf'):
-                click_type, description, choices = json_schema_to_click_type(prpty_schema)
+            elif not prpty_schema.get("oneOf"):
+                click_type, description, choices = json_schema_to_click_type(
+                    prpty_schema
+                )
             else:
-                click_type, multiple, description = handle_oneof(prpty_schema['oneOf'])
+                click_type, multiple, description = handle_oneof(prpty_schema["oneOf"])
                 # Not all oneOf schema can be handled by click
                 if not click_type:
                     continue
@@ -62,16 +68,23 @@ def params_factory(schemas: List[dict]) -> list:
                 description = description.capitalize()
 
                 if multiple:
-                    if not description.endswith('.'):
-                        description += '.'
-                    description += ' Multiple usages of this option are allowed'
+                    if not description.endswith("."):
+                        description += "."
+                    description += " Multiple usages of this option are allowed"
 
             param_decls = [x for x in param_decls if x not in unique_decls]
             if not param_decls:
                 continue
 
             unique_decls += param_decls
-            option = partial(click.Option, param_decls=param_decls, help=description, default=prpty_schema.get('default'), callback=validate_schema_callback, multiple=multiple)
+            option = partial(
+                click.Option,
+                param_decls=param_decls,
+                help=description,
+                default=prpty_schema.get("default"),
+                callback=validate_schema_callback,
+                multiple=multiple,
+            )
 
             if choices:
                 option = option(type=choices)
@@ -81,7 +94,6 @@ def params_factory(schemas: List[dict]) -> list:
                 option = option()
 
             params.append(option)
-
     return params
 
 
@@ -105,10 +117,10 @@ def func_factory(p, method: str) -> callable:
 def get_param_decals_from_name(option_name: str) -> str:
     """Converts a name to a param name"""
     name = option_name.replace("_", "-")
-    return f'--{name}'
+    return f"--{name}"
 
 
 def get_flag_param_decals_from_bool(option_name: str) -> str:
     """Return a '--do/not-do' style flag param"""
     name = option_name.replace("_", "-")
-    return f'--{name}/--no-{name}'
+    return f"--{name}/--no-{name}"

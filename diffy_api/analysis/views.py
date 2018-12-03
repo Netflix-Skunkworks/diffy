@@ -13,12 +13,9 @@ from diffy.exceptions import TargetNotFound
 
 from diffy_api.core import async_analysis
 from diffy_api.common.util import validate_schema
-from diffy_api.schemas import (
-    analysis_input_schema,
-    task_output_schema,
-)
+from diffy_api.schemas import analysis_input_schema, task_output_schema
 
-mod = Blueprint('analysis', __name__)
+mod = Blueprint("analysis", __name__)
 api = Api(mod)
 
 
@@ -51,7 +48,9 @@ class AnalysisList(Resource):
           :statuscode 200: no error
           :statuscode 403: unauthenticated
         """
-        data = plugins.get(current_app.config['DIFFY_PERSISTENCE_PLUGIN']).get_all('analysis')
+        data = plugins.get(current_app.config["DIFFY_PERSISTENCE_PLUGIN"]).get_all(
+            "analysis"
+        )
         return data, 200
 
     @validate_schema(analysis_input_schema, task_output_schema)
@@ -80,7 +79,7 @@ class AnalysisList(Resource):
         try:
             return async_analysis.queue(request.json)
         except TargetNotFound as ex:
-            return {'message': ex.message}, 404
+            return {"message": ex.message}, 404
 
 
 class Analysis(Resource):
@@ -111,10 +110,10 @@ class Analysis(Resource):
           :statuscode 200: no error
           :statuscode 403: unauthenticated
         """
-        plugin_slug = current_app.config['DIFFY_PERSISTENCE_PLUGIN']
+        plugin_slug = current_app.config["DIFFY_PERSISTENCE_PLUGIN"]
         p = plugins.get(plugin_slug)
-        return p.get('analysis', key)
+        return p.get("analysis", key)
 
 
-api.add_resource(AnalysisList, '/analysis', endpoint='analysisList')
-api.add_resource(Analysis, '/analysis/<key>', endpoint='analysis')
+api.add_resource(AnalysisList, "/analysis", endpoint="analysisList")
+api.add_resource(Analysis, "/analysis/<key>", endpoint="analysis")

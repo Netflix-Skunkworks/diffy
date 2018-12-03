@@ -16,15 +16,13 @@ from diffy_api.baseline.views import mod as baseline_bp
 from diffy_api.analysis.views import mod as analysis_bp
 from diffy_api.tasks.views import mod as task_bp
 
-DIFFY_BLUEPRINTS = (
-    baseline_bp,
-    analysis_bp,
-    task_bp
-)
+DIFFY_BLUEPRINTS = (baseline_bp, analysis_bp, task_bp)
 
 
 def create_app(config=None):
-    app = factory.create_app(app_name=__name__, blueprints=DIFFY_BLUEPRINTS, config=config)
+    app = factory.create_app(
+        app_name=__name__, blueprints=DIFFY_BLUEPRINTS, config=config
+    )
     configure_hook(app)
     return app
 
@@ -54,7 +52,7 @@ def configure_hook(app):
     @app.after_request
     def after_request(response):
         # Return early if we don't have the start time
-        if not hasattr(g, 'request_start_time'):
+        if not hasattr(g, "request_start_time"):
             return response
 
         # Get elapsed time in milliseconds
@@ -70,5 +68,6 @@ def configure_hook(app):
 
         # Record our response time metric
         app.logger.debug(
-            f'Request Info: Elapsed: {elapsed} Status Code: {response.status_code} Endpoint: {request.endpoint} Method: {request.method}')
+            f"Request Info: Elapsed: {elapsed} Status Code: {response.status_code} Endpoint: {request.endpoint} Method: {request.method}"
+        )
         return response
