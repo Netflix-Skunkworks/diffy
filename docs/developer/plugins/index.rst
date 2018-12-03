@@ -31,12 +31,13 @@ pkg_resources (which is what we recommend), your file might contain::
     except Exception as e:
         VERSION = 'unknown'
 
-Inside of ``plugin.py``, you'll declare your Plugin class::
+Inside of ``plugin.py``, you'll declare your Plugin class, inheriting from the
+parent classes that establish your plugin's functionality::
 
     import diffy_pluginname
-    from diffy.plugins.base.issuer import IssuerPlugin
+    from diffy.plugins.bases import AnalysisPlugin, PersistencePlugin
 
-    class PluginName(IssuerPlugin):
+    class PluginName(AnalysisPlugin):
         title = 'Plugin Name'
         slug = 'pluginname'
         description = 'My awesome plugin!'
