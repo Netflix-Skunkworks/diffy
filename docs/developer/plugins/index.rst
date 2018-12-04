@@ -7,7 +7,8 @@ Several interfaces exist for extending Diffy:
 * Target (diffy.plugins.bases.target)
 
 Each interface has its own functions that will need to be defined in order for
-your plugin to work correctly. See :ref:`Plugin Interfaces <PluginInterfaces>` for details.
+your plugin to work correctly. See :ref:`Plugin Interfaces <PluginInterfaces>`
+for details.
 
 
 Structure
@@ -20,8 +21,9 @@ A plugins layout generally looks like the following::
     diffy_pluginname/__init__.py
     diffy_pluginname/plugin.py
 
-The ``__init__.py`` file should contain no plugin logic, and at most, a VERSION = 'x.x.x' line. For example,
-if you want to pull the version using pkg_resources (which is what we recommend), your file might contain::
+The ``__init__.py`` file should contain no plugin logic, and at most, a VERSION
+= 'x.x.x' line. For example, if you want to pull the version using
+pkg_resources (which is what we recommend), your file might contain::
 
     try:
         VERSION = __import__('pkg_resources') \
@@ -29,12 +31,13 @@ if you want to pull the version using pkg_resources (which is what we recommend)
     except Exception as e:
         VERSION = 'unknown'
 
-Inside of ``plugin.py``, you'll declare your Plugin class::
+Inside of ``plugin.py``, you'll declare your Plugin class, inheriting from the
+parent classes that establish your plugin's functionality::
 
     import diffy_pluginname
-    from diffy.plugins.base.issuer import IssuerPlugin
+    from diffy.plugins.bases import AnalysisPlugin, PersistencePlugin
 
-    class PluginName(IssuerPlugin):
+    class PluginName(AnalysisPlugin):
         title = 'Plugin Name'
         slug = 'pluginname'
         description = 'My awesome plugin!'
@@ -52,14 +55,15 @@ And you'll register it via ``entry_points`` in your ``setup.py``::
         # ...
         entry_points={
            'diffy.plugins': [
-                'pluginname = diffy_pluginname.issuers:PluginName'
+                'pluginname = diffy_pluginname.analysis:PluginName'
             ],
         },
     )
 
-You can potentially package multiple plugin types in one package, say you want to create a source and
-destination plugins for the same third-party. To accomplish this simply alias the plugin in entry points to point
-at multiple plugins within your package::
+You can potentially package multiple plugin types in one package, say you want
+to create a source and destination plugins for the same third-party. To
+accomplish this simply alias the plugin in entry points to point at multiple
+plugins within your package::
 
     setup(
         # ...
@@ -71,12 +75,13 @@ at multiple plugins within your package::
         },
     )
 
-Once your plugin files are in place and the ``setup.py`` file has been modified, you can load your plugin by reinstalling diffy:
-::
+Once your plugin files are in place and the ``setup.py`` file has been
+modified, you can load your plugin by reinstalling diffy::
 
     (diffy)$ pip install -e .
 
-That's it! Users will be able to install your plugin via ``pip install <package name>``.
+That's it! Users will be able to install your plugin via ``pip install <package
+name>``.
 
 .. SeeAlso:: For more information about python packages see `Python Packaging <https://packaging.python.org/en/latest/distributing.html>`_
 
@@ -85,14 +90,15 @@ That's it! Users will be able to install your plugin via ``pip install <package 
 Plugin Interfaces
 =================
 
-In order to use the interfaces all plugins are required to inherit and override unimplemented functions
-of the parent object.
+In order to use the interfaces all plugins are required to inherit and override
+unimplemented functions of the parent object.
 
 Analysis
 --------
 
-Analysis plugins are used when you are trying to scope or evaluate information across a cluster. They can either process
-information locally or used an external system (i.e. for ML).
+Analysis plugins are used when you are trying to scope or evaluate information
+across a cluster. They can either process information locally or used an
+external system (i.e. for ML).
 
 
 The `AnalysisPlugin` exposes on function::
@@ -100,12 +106,14 @@ The `AnalysisPlugin` exposes on function::
     def run(self, items, **kwargs):
         # run analysis on items
 
-Diffy will pass all items collected it will additionally pass the optional `baseline` flag if the current configuration is deemed to be a baseline.
+Diffy will pass all items collected it will additionally pass the optional
+`baseline` flag if the current configuration is deemed to be a baseline.
 
 Collection
 ----------
 
-Collection plugins allow you to collect information from multiple hosts. This provides flexibility on how information is collected, depending on the
+Collection plugins allow you to collect information from multiple hosts. This
+provides flexibility on how information is collected, depending on the
 infrastructure available to you.
 
 The CollectionPlugin requires only one function to be implemented::
@@ -127,17 +135,21 @@ The CollectionPlugin requires only one function to be implemented::
         }
         """
 
-Often times is useful to propagate to external systems why a command is being issued, here diffy will pass a `incident` string
-that allows the origin of the command to be audited.
+The `incident` string is intended to document a permanent identifier for your
+investigation. You may insert any unique ticketing system identifier (for
+example, `DFIR-21996`), or comment, here.
 
 Payload
 -------
 
-Diffy includes the ability to modify the `payload` for any given command. In general this payload is the dynamic generation
-of commands sent to the target. For instance if you are simply running a `netstat` payload you may have to actually run a series
-of commands to generate a JSON output from the `netstat` command.
+Diffy includes the ability to modify the `payload` for any given command. In
+general this payload is the dynamic generation of commands sent to the target.
+For instance if you are simply running a `netstat` payload you may have to
+actually run a series of commands to generate a JSON output from the `netstat`
+command.
 
-Here again the incident is passed to be dynamically included into the commands if applicable.
+Here again the incident is passed to be dynamically included into the commands
+if applicable.
 
 The PayloadPlugin requires only one function to be implemented::
 
@@ -148,8 +160,9 @@ The PayloadPlugin requires only one function to be implemented::
 Persistence
 -----------
 
-Persistence plugins give Diffy to store the outputs of both collection and analysis to location other than memory. This
-is useful for baseline tasks or persisting data for external analysis tasks.
+Persistence plugins give Diffy to store the outputs of both collection and
+analysis to location other than memory. This is useful for baseline tasks or
+persisting data for external analysis tasks.
 
 The PersistencePlugin requires two functions to be implemented::
 
@@ -162,7 +175,8 @@ The PersistencePlugin requires two functions to be implemented::
 Target
 ------
 
-Target plugins give the Diffy the ability interact with external systems to resolve targets for commands.
+Target plugins give the Diffy the ability interact with external systems to
+resolve targets for commands.
 
 The TargetPlugin requires one function to be implemented::
 
@@ -195,7 +209,8 @@ Augment your setup.py to ensure at least the following:
 conftest.py
 -----------
 
-The ``conftest.py`` file is our main entry-point for py.test. We need to configure it to load the Diffy pytest configuration:
+The ``conftest.py`` file is our main entry-point for py.test. We need to
+configure it to load the Diffy pytest configuration:
 
 .. code-block:: python
 
@@ -205,7 +220,9 @@ The ``conftest.py`` file is our main entry-point for py.test. We need to configu
 Running Tests
 -------------
 
-Running tests follows the py.test standard. As long as your test files and methods are named appropriately (``test_filename.py`` and ``test_function()``) you can simply call out to py.test:
+Running tests follows the py.test standard. As long as your test files and
+methods are named appropriately (``test_filename.py`` and ``test_function()``)
+you can simply call out to py.test:
 
 ::
 

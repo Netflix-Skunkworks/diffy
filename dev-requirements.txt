@@ -5,111 +5,113 @@
 #    pip-compile --output-file dev-requirements.txt dev-requirements.in
 #
 -e git+git://github.com/forestmonster/moto@1.3.5#egg=moto-1.3.5
-alabaster==0.7.11         # via sphinx
-aniso8601==3.0.2
+alabaster==0.7.12         # via sphinx
+aniso8601==4.0.1
 asn1crypto==0.24.0        # via cryptography
 aspy.yaml==1.1.1          # via pre-commit
-atomicwrites==1.1.5       # via pytest
-attrs==18.1.0             # via pytest
-autopep8==1.3.5           # via pre-commit-hooks
-aws-xray-sdk==1.1.2
+atomicwrites==1.2.1       # via pytest
+attrs==18.2.0             # via pytest
+aws-xray-sdk==0.95
 babel==2.6.0              # via sphinx
-bandit==1.4.0
+bandit==1.5.1
 blinker==1.4
-boto3==1.7.75
+boto3==1.9.57
 boto==2.49.0
-botocore==1.10.75
+botocore==1.12.57
 bumpversion==0.5.3
-cached-property==1.4.3    # via pre-commit
-certifi==2018.4.16        # via requests
+cached-property==1.5.1    # via pre-commit
+certifi==2018.11.29       # via requests
 cffi==1.11.5              # via cryptography
 cfgv==1.1.0               # via pre-commit
 chardet==3.0.4            # via requests
 click-log==0.3.2
 click==7.0
 codecov==2.0.15
-cookies==2.2.1            # via responses
-coverage==4.5.1           # via codecov, pytest-cov
-croniter==0.3.25
-cryptography==2.3
+cookies==2.2.1
+coverage==4.5.2           # via codecov, pytest-cov
+croniter==0.3.26
+cryptography==2.4.2
 deepdiff==3.3.0
-docker-pycreds==0.3.0     # via docker
-docker==3.4.1
+docker-pycreds==0.4.0     # via docker
+docker==3.6.0
 docutils==0.14
-dogpile.cache==0.6.7
+dogpile.cache==0.6.8
 ecdsa==0.13               # via python-jose
-first==2.0.1              # via pip-tools
-flake8==3.5.0             # via pre-commit-hooks
+flake8==3.6.0             # via pre-commit-hooks
 flask-restful==0.3.6
-flask-rq2==18.1
+flask-rq2==18.2.1
 flask==1.0.2
-future==0.16.0            # via python-jose
-fuzzywuzzy==0.16.0
-gitdb2==2.0.4             # via gitpython
+future==0.17.1            # via python-jose
+fuzzywuzzy==0.17.0
+gitdb2==2.0.5             # via gitpython
 gitpython==2.1.11         # via bandit
 gunicorn==19.9.0
-identify==1.1.4           # via pre-commit
+identify==1.1.7           # via pre-commit
 idna==2.7                 # via cryptography, requests
-imagesize==1.0.0          # via sphinx
+imagesize==1.1.0          # via sphinx
+importlib-metadata==0.7   # via pre-commit
+importlib-resources==1.0.2  # via pre-commit
 inflection==0.3.1
-itsdangerous==0.24
+itsdangerous==1.1.0
 jinja2==2.10
 jmespath==0.9.3
 jsondiff==1.1.2
-jsonpickle==0.9.6
+jsonpickle==1.0
 jsonschema==2.6.0
-markupsafe==1.0
+markupsafe==1.1.0
 marshmallow-jsonschema==0.5.0
-marshmallow==2.15.6
+marshmallow==2.16.3
 mccabe==0.6.1             # via flake8
 mock==2.0.0
 more-itertools==4.3.0     # via pytest
-mypy==0.620
-nodeenv==1.3.2            # via pre-commit
+mypy-extensions==0.4.1    # via mypy
+mypy==0.641
+nodeenv==1.3.3            # via pre-commit
 packaging==18.0           # via sphinx
-pbr==4.2.0                # via mock, stevedore
-pip-tools==3.0.0
-pluggy==0.7.1             # via pytest
-pre-commit-hooks==1.4.0
-pre-commit==1.11.1
-py==1.5.4                 # via pytest
-pyaml==17.12.1
-pycodestyle==2.4.0        # via autopep8, flake8
+pbr==5.1.1                # via mock, stevedore
+pip-tools==3.1.0
+pluggy==0.8.0             # via pytest
+pre-commit-hooks==2.0.0
+pre-commit==1.12.0
+py==1.7.0                 # via pytest
+pyaml==18.11.0
+pycodestyle==2.4.0        # via flake8
 pycparser==2.19           # via cffi
-pycryptodome==3.6.4       # via python-jose
+pycryptodome==3.7.2       # via python-jose
 pyflakes==2.0.0           # via flake8
-pygments==2.2.0           # via sphinx
-pyparsing==2.2.2          # via packaging
-pytest-cov==2.5.1
-pytest-flask==0.13.0
-pytest==3.7.1
-python-dateutil==2.7.3
-python-jose==3.0.0
+pygments==2.3.0           # via sphinx
+pyparsing==2.3.0          # via packaging
+pytest-cov==2.6.0
+pytest-flask==0.14.0
+pytest==4.0.1
+python-dateutil==2.7.5
+python-jose==2.0.2
 python-levenshtein==0.12.0
-pytz==2018.5
+pytz==2018.7
 pyyaml==3.13
 raven[flask]==6.9.0
 redis==2.10.6
-requests==2.19.1          # via aws-xray-sdk, codecov, docker, responses, sphinx
-responses==0.9.0
+requests==2.20.1          # via aws-xray-sdk, codecov, docker, responses, sphinx
+responses==0.10.4
 retrying==1.3.3
 rq-scheduler==0.8.3
 rq==0.12.0
 s3transfer==0.1.13
+simplejson==3.16.0
 six==1.11.0
-smmap2==2.0.4             # via gitdb2
+smmap2==2.0.5             # via gitdb2
 snowballstemmer==1.2.1    # via sphinx
 sphinx-autodoc-annotation==1.0.post1
-sphinx==1.8.1
+sphinx==1.8.2
 sphinxcontrib-websupport==1.1.0  # via sphinx
-stevedore==1.29.0         # via bandit
-swag-client==0.4.2
+stevedore==1.30.0         # via bandit
+swag-client==0.4.3
 tabulate==0.8.2
-toml==0.9.6               # via pre-commit
+toml==0.10.0              # via pre-commit
 typed-ast==1.1.0          # via mypy
-urllib3==1.23             # via requests
-virtualenv==16.0.0        # via pre-commit
-websocket-client==0.48.0  # via docker
+urllib3==1.24.1
+virtualenv==16.1.0        # via pre-commit
+websocket-client==0.54.0  # via docker
 werkzeug==0.14.1
 wrapt==1.10.11            # via aws-xray-sdk
 xmltodict==0.11.0

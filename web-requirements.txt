@@ -4,42 +4,44 @@
 #
 #    pip-compile --output-file web-requirements.txt web-requirements.in
 #
-aniso8601==3.0.2          # via flask-restful
+aniso8601==4.0.1          # via flask-restful
 blinker==1.4              # via raven
-boto3==1.7.75
-botocore==1.10.75
+boto3==1.9.57
+botocore==1.12.57
 click-log==0.3.2
 click==7.0
-croniter==0.3.25          # via rq-scheduler
+croniter==0.3.26          # via rq-scheduler
 deepdiff==3.3.0
 docutils==0.14
-dogpile.cache==0.6.7
+dogpile.cache==0.6.8
 flask-restful==0.3.6
-flask-rq2==18.1
+flask-rq2==18.2.1
 flask==1.0.2
-fuzzywuzzy==0.16.0
+fuzzywuzzy==0.17.0
 gunicorn==19.9.0
 inflection==0.3.1
-itsdangerous==0.24        # via flask
+itsdangerous==1.1.0       # via flask
 jinja2==2.10              # via flask
 jmespath==0.9.3
 jsondiff==1.1.2
-jsonpickle==0.9.6
+jsonpickle==1.0
 jsonschema==2.6.0
-markupsafe==1.0           # via jinja2
+markupsafe==1.1.0         # via jinja2
 marshmallow-jsonschema==0.5.0
-marshmallow==2.15.6
-python-dateutil==2.7.3
+marshmallow==2.16.3
+python-dateutil==2.7.5
 python-levenshtein==0.12.0
-pytz==2018.5              # via flask-restful
+pytz==2018.7              # via flask-restful
 pyyaml==3.13
 raven[flask]==6.9.0
-redis==2.10.6             # via rq
+redis==2.10.6             # via flask-rq2, rq
 retrying==1.3.3
 rq-scheduler==0.8.3       # via flask-rq2
 rq==0.12.0                # via flask-rq2, rq-scheduler
 s3transfer==0.1.13
+simplejson==3.16.0
 six==1.11.0
-swag-client==0.4.2
+swag-client==0.4.3
 tabulate==0.8.2
+urllib3==1.24.1
 werkzeug==0.14.1          # via flask

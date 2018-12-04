@@ -4,7 +4,6 @@ repos:
     hooks:
     -   id: check-merge-conflict
     -   id: detect-private-key
-    -   id: requirements-txt-fixer
 -   repo: https://github.com/ambv/black
     rev: stable
     hooks:
