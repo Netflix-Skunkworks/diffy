@@ -29,6 +29,7 @@ class BaselineSchema(DiffyInputSchema):
 
 class AnalysisSchema(BaselineSchema):
     analysis_plugin = fields.Nested(AnalysisPluginSchema, missing={})
+    # TODO: move incident_id from BaselineSchema here
 
 
 class TaskOutputSchema(DiffyOutputSchema):
