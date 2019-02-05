@@ -140,6 +140,9 @@ def new():
 @new.command('baseline')
 @click.argument('target-key')
 @click.option('--target-plugin', default='local-target', callback=get_plugin_callback)
+# TODO: Make 'target' and 'inventory' plugins mutually exclusive
+# TODO: Consider an 'async' flag
+@click.option('--inventory-plugin', callback=get_plugin_callback)
 @click.option('--persistence-plugin', default='local-file', callback=get_plugin_callback)
 @click.option('--payload-plugin', default='local-command', callback=get_plugin_callback)
 @click.option('--collection-plugin', default='local-shell-collection', callback=get_plugin_callback)
@@ -147,14 +150,28 @@ def new():
 @add_plugins_args
 def baseline_command(
     target_key,
-    incident_id,
     target_plugin,
+    inventory_plugin,
     persistence_plugin,
-    collection_plugin,
     payload_plugin,
+    collection_plugin,
+    incident_id,
     **kwargs,
 ):
     """Creates a new baseline based on the given ASG."""
+    if inventory_plugin:
+        for item in inventory_plugin['plugin'].get():
+            target_plugin['options'] = item['options']
+            baseline(
+                item['target'],
+                item['target_plugin'],
+                payload_plugin,
+                collection_plugin,
+                persistence_plugin,
+                incident_id=incident_id,
+                **kwargs,
+            )
+
     baselines = baseline(
         target_key,
         target_plugin,

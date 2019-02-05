@@ -13,5 +13,5 @@ class InventoryPlugin(Plugin):
     type = "inventory"
     _schema = PluginOptionSchema
 
-    def poll(self, queue, **kwargs):
+    def get(self, **kwargs):
         raise NotImplementedError
