@@ -7,6 +7,7 @@
 """
 import logging
 from typing import List
+from shutil import which
 from boto3 import Session
 
 from diffy.config import CONFIG
@@ -32,30 +33,41 @@ class OSQueryPayloadPlugin(PayloadPlugin):
         logger.debug("Generating osquery payload.")
         session = Session()
 
-        # TODO check for existence before deployment
-        # we run with these commands with diffy credentials so as to not pollute the on-instance credentials
-        creds = session.get_credentials()
-        region = kwargs.get("region", CONFIG.get("DIFFY_PAYLOAD_OSQUERY_REGION"))
-        key = kwargs.get("key", CONFIG.get("DIFFY_PAYLOAD_OSQUERY_KEY"))
+        # If osquery isn't present, obtain an osquery binary from S3.
+        if not which("osqueryi"):
+            # We run these commands with Diffy credentials so as to not pollute
+            # the on-instance credentials.
+            creds = session.get_credentials()
+            region = kwargs.get("region", CONFIG.get("DIFFY_PAYLOAD_OSQUERY_REGION"))
+            key = kwargs.get("key", CONFIG.get("DIFFY_PAYLOAD_OSQUERY_KEY"))
 
-        if not region:
-            raise BadArguments(
-                "DIFFY_PAYLOAD_OSQUERY_REGION required for use with OSQuery plugin."
-            )
+            if not region:
+                raise BadArguments(
+                    "DIFFY_PAYLOAD_OSQUERY_REGION required for use with OSQuery plugin."
+                )
 
-        if not key:
-            raise BadArguments(
-                "DIFFY_PAYLOAD_OSQUERY_KEY required for use with OSQuery plugin."
-            )
+            if not key:
+                raise BadArguments(
+                    "DIFFY_PAYLOAD_OSQUERY_KEY required for use with OSQuery plugin."
+                )
 
-        commands: List[str] = [
-            f"export AWS_ACCESS_KEY_ID={creds.access_key}",
-            f"export AWS_SECRET_ACCESS_KEY={creds.secret_key}",
-            f"export AWS_SESSION_TOKEN={creds.token}",
-            f"cd $(mktemp -d -t binaries-{incident}-`date +%s`-XXXXXX)",
-            f"aws s3 --region {region} cp s3://{key} ./latest.tar.bz2 --quiet",
-            "tar xvf latest.tar.bz2 &>/dev/null",
-        ]
+            # If we've downloaded our own osquery collection binary, create a
+            # symbolic link, allowing us to use relative commands elsewhere.
+            commands: List[str] = [
+                f"export AWS_ACCESS_KEY_ID={creds.access_key}",
+                f"export AWS_SECRET_ACCESS_KEY={creds.secret_key}",
+                f"export AWS_SESSION_TOKEN={creds.token}",
+                f"cd $(mktemp -d -t binaries-{incident}-`date +%s`-XXXXXX)",
+                f"aws s3 --region {region} cp s3://{key} ./latest.tar.bz2 --quiet",
+                "tar xvf latest.tar.bz2 &>/dev/null",
+                "export PATH=${PATH}:${HOME}/.local/bin",
+                "mkdir -p ${HOME}/.local/bin",
+                "ln -s ./usr/bin/osqueryi ${HOME}/.local/bin/osqueryi",
+            ]
+        else:
+            commands: List[str] = [
+                f"cd $(mktemp -d -t binaries-{incident}-`date +%s`-XXXXXX)"
+            ]
 
         commands += CONFIG.get("DIFFY_PAYLOAD_OSQUERY_COMMANDS")
         return commands
