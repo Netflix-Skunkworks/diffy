@@ -32,7 +32,7 @@ def install_plugins():
     #     ],
     # },
     for ep in pkg_resources.iter_entry_points("diffy.plugins"):
-        logging.info(f"Loading plugin {ep.name}")
+        logger.info(f"Loading plugin {ep.name}")
         try:
             plugin = ep.load()
         except Exception:

@@ -191,32 +191,69 @@ class Config(dict):
 
 
 DEFAULTS: Dict[str, Union[Iterable[Any], Path, str, bool, None]] = {
+    # DIFFY_ACCOUNTS: If SWAG is enabled (see below), we'll populate this list
+    # with the accounts in which Diffy will operate.
     'DIFFY_ACCOUNTS': [],
+    # DIFFY_REGIONS: The regions to which Diffy has access.
     'DIFFY_REGIONS': AVAILABLE_REGIONS,
+    # DIFFY_DEFAULT_REGION: The default region in which Diffy will operate to
+    # baseline and analyze host differences.
     'DIFFY_DEFAULT_REGION': 'us-west-2',
+    # DIFFY_SWAG_ENABLED: Whether to utilize SWAG for translation of AWS
+    # account names to numbers. See
+    # https://github.com/Netflix-Skunkworks/swag-client
     'DIFFY_SWAG_ENABLED': False,
+    # DIFFY_LOCAL_FILE_DIRECTORY: When saving results to a local file, we use
+    # this directory to build the final location of the output.
     'DIFFY_LOCAL_FILE_DIRECTORY': Path(__file__).resolve().parent.parent.absolute(),
+    # DIFFY_AWS_PERSISTENCE_BUCKET: An AWS S3 bucket name describing the
+    # location where Diffy will save its output.
     'DIFFY_AWS_PERSISTENCE_BUCKET': 'mybucket',
+    # DIFFY_AWS_ASSUME_ROLE: An AWS IAM role into which Diffy will assume to
+    # take its actions.
     'DIFFY_AWS_ASSUME_ROLE': 'Diffy',
+    # DIFFY_PAYLOAD_LOCAL_COMMANDS: A set of raw commands that Diffy will send
+    # to the local host, if local collection is specified.
     'DIFFY_PAYLOAD_LOCAL_COMMANDS': [
         'osqueryi --json "SELECT address, port, name, pid, cmdline FROM listening_ports, processes USING (pid) WHERE protocol = 6 and family = 2 AND address NOT LIKE \'127.0.0.%\'"',
         'osqueryi --json "SELECT * FROM crontab"'
         ],
-    'DIFFY_PAYLOAD_OSQUERY_KEY': '',
+    # DIFFY_PAYLOAD_OSQUERY_KEY: An AWS S3 key prefix describing the download
+    # location of your osquery binary.
+    'DIFFY_PAYLOAD_OSQUERY_KEY': 'osquery-download',
+    # DIFFY_PAYLOAD_OSQUERY_REGION: The default region of the S3 bucket from
+    # where Diffy will download your osquery binary.
     'DIFFY_PAYLOAD_OSQUERY_REGION': 'us-west-2',
+    # DIFFY_PAYLOAD_OSQUERY_COMMANDS: The commands that Diffy will send to the
+    # host to be run.
     'DIFFY_PAYLOAD_OSQUERY_COMMANDS': [
         'osqueryi --json "SELECT * FROM crontab"',
         "osqueryi --json \"SELECT address, port, name, pid, cmdline FROM listening_ports, processes USING (pid) WHERE protocol = 6 and family = 2 AND address NOT LIKE '127.0.0.%'\"",
     ],
+    # DIFFY_PERSISTENCE_PLUGIN: The default plugin to use to save Diffy
+    # results.
     "DIFFY_PERSISTENCE_PLUGIN": "local-file",
+    # DIFFY_TARGET_PLUGIN: The default targeting plugin. Target plugins locate
+    # and identify hosts to baseline or to analyze.
     "DIFFY_TARGET_PLUGIN": "auto-scaling-target",
+    # DIFFY_PAYLOAD_PLUGIN: The default plugin to use for creating a payload to
+    # send to remote hosts for execution.
     "DIFFY_PAYLOAD_PLUGIN": "local-command",
+    # DIFFY_COLLECTION_PLUGIN: The default plugin to use for collection of
+    # baseline and analysis results.
     "DIFFY_COLLECTION_PLUGIN": "ssm-collection",
+    # DIFFY_ANALYSIS_PLUGIN: The default analysis plugin to apply to Diffy
+    # results.
     "DIFFY_ANALYSIS_PLUGIN": "local-simple",
+    # SWAG_TYPE: The storage protocol of SWAG data.
     "SWAG_TYPE": "s3",
+    # SWAG_BUCKET_NAME: The AWS S3 bucket location of SWAG data.
     "SWAG_BUCKET_NAME": None,
+    # SWAG_DATA_FILE: Name of the file containing SWAG data.
     "SWAG_DATA_FILE": "v2/accounts.json",
+    # RQ_REDIS_URL: URL of the Redis queue utilized for Diffy dispatch.
     "RQ_REDIS_URL": None,
+    # LOG_FILE: An output file for Diffy API logs.
     "LOG_FILE": None,
 }
 
