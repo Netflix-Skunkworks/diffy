@@ -36,7 +36,7 @@ docker-pycreds==0.4.0     # via docker
 docker==3.7.2
 docutils==0.14
 dogpile.cache==0.7.1
-ecdsa==0.13               # via python-jose
+ecdsa==0.13.3             # via python-jose
 entrypoints==0.3          # via flake8
 flake8==3.7.7             # via pre-commit-hooks
 flask-restful==0.3.7
@@ -51,7 +51,6 @@ identify==1.4.1           # via pre-commit
 idna==2.8                 # via requests
 imagesize==1.1.0          # via sphinx
 importlib-metadata==0.9   # via pre-commit
-importlib-resources==1.0.2  # via pre-commit
 inflection==0.3.1
 itsdangerous==1.1.0
 jinja2==2.10.1
