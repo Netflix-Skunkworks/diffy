@@ -29,14 +29,15 @@ def load_requirements(filename):
         return [line.split()[0] for line in reqfile if not line.startswith(('#', '-'))]
 
 
-def moto_broken():
-    """Until https://github.com/spulec/moto/pull/1589 is resolved.
-
-    Then we will no longer need to fork moto, roll our own release, and rely either on
-    this hack, or the dependency_links declaration.
-    """
-    reqts = load_requirements('dev-requirements.txt')
-    return reqts.append('moto==1.3.5')
+# Disabled the associated tests.
+#def moto_broken():
+#    """Until https://github.com/spulec/moto/pull/1589 is resolved.
+#
+#    Then we will no longer need to fork moto, roll our own release, and rely either on
+#    this hack, or the dependency_links declaration.
+#    """
+#    reqts = load_requirements('dev-requirements.txt')
+#    return reqts.append('moto==1.3.5')
 
 
 # Populates __version__ without importing the package
@@ -58,7 +59,7 @@ setup(
     long_description=long_description,
     packages=find_packages(exclude=['diffy.tests']),
     include_package_data=True,
-    dependency_links=['git+https://github.com/forestmonster/moto.git@master#egg=moto-1.3.5'],
+    #dependency_links=['git+https://github.com/forestmonster/moto.git@master#egg=moto-1.3.5'],
     install_requires=load_requirements('requirements.txt'),
     tests_require=['pytest'],
     extras_require={
