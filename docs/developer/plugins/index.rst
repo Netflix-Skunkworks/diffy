@@ -5,6 +5,7 @@ Several interfaces exist for extending Diffy:
 * Payload (diffy.plugins.bases.payload)
 * Persistence (diffy.plugins.bases.persistence)
 * Target (diffy.plugins.bases.target)
+* Inventory (diffy.plugins.bases.inventory)
 
 Each interface has its own functions that will need to be defined in order for
 your plugin to work correctly. See :ref:`Plugin Interfaces <PluginInterfaces>`
@@ -175,13 +176,32 @@ The PersistencePlugin requires two functions to be implemented::
 Target
 ------
 
-Target plugins give the Diffy the ability interact with external systems to
-resolve targets for commands.
+Target plugins give Diffy the ability to interact with external systems to resolve
+targets for commands.
 
-The TargetPlugin requires one function to be implemented::
+The TargetPlugin class requires one function to be implemented::
 
     def get(self, key, **kwargs):
         # fetch targets based on key
+
+
+Inventory
+---------
+
+Inventory plugins interact with asset inventory services to pull a list of
+targets for baselining and analysis.
+
+Inheriting from the InventoryPlugin class requires that you implement a ``process``
+method::
+
+    def process(self, **kwargs):
+        # Process a new set of targets from a desired source.
+        #
+        # This method should handle the interaction with your desired source,
+        # and then send the results to :meth:`diffy_api.core.async_baseline`.
+        #
+        # If you poll the source regularly, ensure that you
+        # only request recently deployed assets.
 
 
 Testing
