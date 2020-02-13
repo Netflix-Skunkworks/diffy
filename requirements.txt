@@ -33,6 +33,3 @@ swag-client==0.4.7
 tabulate==0.8.6
 urllib3==1.25.8           # via botocore
 zipp==2.2.0               # via importlib-metadata
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools
