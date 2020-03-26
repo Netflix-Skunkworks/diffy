@@ -5,7 +5,7 @@
     :license: Apache, see LICENSE for more details.
 """
 import logging
-from fuzzywuzzy import process
+from rapidfuzz import process
 
 from honeybee.extensions import swag
 from honeybee.exceptions import ResolveException
