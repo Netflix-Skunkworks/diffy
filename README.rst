@@ -104,3 +104,5 @@ Why python 3 only?
 Please see `Guido's guidance
 <https://mail.python.org/pipermail/python-dev/2018-March/152348.html>`_
 regarding the Python 2.7 end of life date.
+
+*Dependencies scanned by PyUp.io.*
