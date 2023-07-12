@@ -1,5 +1,7 @@
-Diffy
+Diffy (DEPRECATED)
 =====
+
+**Diffy has been deprecated** at Netflix. This software is no longer supported.
 
 .. image:: docs/images/diffy_small.png
     :align: right
@@ -35,7 +37,7 @@ Diffy
     :alt: RTD
 
 
-Diffy is a digital forensics and incident response (DFIR) tool developed by
+Diffy is a digital forensics and incident response (DFIR) tool that was developed by
 Netflix's Security Intelligence and Response Team (SIRT).
 
 Diffy allows a forensic investigator to quickly scope a compromise across cloud
