@@ -1,12 +1,11 @@
 boto3
 click
 click-log
-fuzzywuzzy
+rapidfuzz
 jsondiff
 jsonschema
 marshmallow-jsonschema
 python-dateutil
-python-Levenshtein
 PyYAML
 retrying
 swag-client
