@@ -97,7 +97,7 @@ Via pip::
 Roadmap
 -------
 
-We are actively adding more plugins & tests, and improving the documentation.
+**Diffy has been deprecated at Netflix.** This software is no longer maintained or supported.
 
 
 Why python 3 only?
