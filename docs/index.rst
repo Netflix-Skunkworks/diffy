@@ -1,7 +1,9 @@
-Diffy
+Diffy (DEPRECATED)
 =====
 
-Diffy is a differencing engine for digital forensics and incident response
+**Diffy has been deprecated at Netflix.** This software is no longer supported, and will not receive maintenance.
+
+Diffy was a differencing engine for digital forensics and incident response
 (DFIR) in the cloud. Collect data across multiple virtual machines and use
 variations from a baseline, and/or clustering, to scope a incident.
 
