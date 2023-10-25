@@ -4,123 +4,397 @@
 #
 #    pip-compile --index-url=https://pypi.org/simple dev-requirements.in
 #
-alabaster==0.7.12         # via sphinx
-aniso8601==6.0.0
-aspy.yaml==1.3.0          # via pre-commit
-attrs==19.1.0
+alabaster==0.7.12
+    # via sphinx
+aniso8601==8.0.0
+    # via
+    #   -r web-requirements.txt
+    #   flask-restful
+aspy-yaml==1.3.0
+    # via pre-commit
+attrs==19.3.0
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   jsonschema
+    #   pytest
 aws-xray-sdk==0.95
-babel==2.8.0              # via sphinx
+    # via moto
+babel==2.8.0
+    # via sphinx
 bandit==1.6.2
+    # via -r dev-requirements.in
 blinker==1.4
-boto3==1.9.131
+    # via
+    #   -r web-requirements.txt
+    #   raven
 boto==2.49.0
-botocore==1.12.131
+    # via moto
+boto3==1.11.17
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   moto
+    #   swag-client
+botocore==1.14.17
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   boto3
+    #   moto
+    #   s3transfer
 bumpversion==0.5.3
-certifi==2019.11.28       # via requests
-cffi==1.13.2              # via cryptography
-cfgv==2.0.1               # via pre-commit
-chardet==3.0.4            # via requests
-click-log==0.3.2
+    # via -r dev-requirements.in
+certifi==2019.11.28
+    # via requests
+cffi==1.13.2
+    # via cryptography
+cfgv==2.0.1
+    # via pre-commit
+chardet==3.0.4
+    # via requests
 click==7.0
-codecov==2.0.15
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   click-log
+    #   flask
+    #   pip-tools
+    #   rq
+    #   swag-client
+click-log==0.3.2
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   swag-client
+codecov==2.1.13
+    # via -r dev-requirements.in
 cookies==2.2.1
-coverage==5.0.1           # via codecov, pytest-cov
-croniter==0.3.29
+    # via moto
+coverage==5.0.1
+    # via
+    #   codecov
+    #   pytest-cov
+croniter==0.3.31
+    # via
+    #   -r web-requirements.txt
+    #   rq-scheduler
 cryptography==2.8
-decorator==4.4.0
-deepdiff==4.0.6
+    # via moto
+decorator==4.4.1
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   dogpile-cache
+deepdiff==4.2.0
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   swag-client
 docker==4.1.0
-docutils==0.14
-dogpile.cache==0.7.1
-ecdsa==0.14.1             # via python-jose
-entrypoints==0.3          # via flake8
-flake8==3.7.9             # via pre-commit-hooks
-flask-restful==0.3.7
+    # via moto
+docutils==0.15.2
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   botocore
+    #   sphinx
+dogpile-cache==0.9.0
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   swag-client
+entrypoints==0.3
+    # via flake8
+flake8==3.7.9
+    # via pre-commit-hooks
+flask==1.1.1
+    # via
+    #   -r web-requirements.txt
+    #   flask-restful
+    #   flask-rq2
+    #   pytest-flask
+    #   raven
+flask-restful==0.3.8
+    # via -r web-requirements.txt
 flask-rq2==18.3
-flask==1.0.2
-future==0.18.2            # via python-jose
-fuzzywuzzy==0.17.0
-gitdb2==2.0.6             # via gitpython
-gitpython==3.0.5          # via bandit
-gunicorn==19.9.0
-identify==1.4.9           # via pre-commit
-idna==2.8                 # via requests
-imagesize==1.2.0          # via sphinx
-importlib-metadata==1.3.0  # via pluggy, pre-commit, pytest
-importlib-resources==1.0.2  # via pre-commit
+    # via -r web-requirements.txt
+fuzzywuzzy==0.18.0
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+gitdb2==2.0.6
+    # via gitpython
+gitpython==3.0.5
+    # via bandit
+gunicorn==20.0.4
+    # via -r web-requirements.txt
+identify==1.4.9
+    # via pre-commit
+idna==2.8
+    # via requests
+imagesize==1.2.0
+    # via sphinx
+importlib-metadata==1.5.0
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
 inflection==0.3.1
+    # via -r web-requirements.txt
 itsdangerous==1.1.0
-jinja2==2.10.1
+    # via
+    #   -r web-requirements.txt
+    #   flask
+jinja2==2.11.1
+    # via
+    #   -r web-requirements.txt
+    #   flask
+    #   moto
+    #   sphinx
 jmespath==0.9.4
-jsondiff==1.1.2
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   boto3
+    #   botocore
+    #   swag-client
+jsondiff==1.2.0
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
 jsonpickle==1.1
-jsonschema==3.0.1
-markupsafe==1.1.1
-marshmallow-jsonschema==0.5.0
-marshmallow==2.19.2
-mccabe==0.6.1             # via flake8
+    # via aws-xray-sdk
+jsonschema==3.2.0
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+markupsafe==2.1.3
+    # via
+    #   -r web-requirements.txt
+    #   jinja2
+    #   werkzeug
+marshmallow==2.20.5
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   marshmallow-jsonschema
+    #   swag-client
+marshmallow-jsonschema==0.9.0
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+mccabe==0.6.1
+    # via flake8
 mock==3.0.5
-more-itertools==8.0.2     # via pytest, zipp
-mypy-extensions==0.4.3    # via mypy
+    # via moto
+more-itertools==8.0.2
+    # via pytest
+moto==1.1.24
+    # via -r dev-requirements.in
 mypy==0.761
-nodeenv==1.3.3            # via pre-commit
-ordered-set==3.1
-packaging==19.2           # via pytest, sphinx
-pbr==5.4.4                # via stevedore
+    # via -r dev-requirements.in
+mypy-extensions==0.4.3
+    # via mypy
+nodeenv==1.3.3
+    # via pre-commit
+ordered-set==3.1.1
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   deepdiff
+packaging==19.2
+    # via
+    #   pytest
+    #   sphinx
+pbr==5.4.4
+    # via stevedore
 pip-tools==4.3.0
-pluggy==0.13.1            # via pytest
-pre-commit-hooks==2.4.0
+    # via -r dev-requirements.in
+pluggy==0.13.1
+    # via pytest
 pre-commit==1.20.0
-py==1.8.1                 # via pytest
+    # via -r dev-requirements.in
+pre-commit-hooks==2.4.0
+    # via -r dev-requirements.in
+py==1.8.1
+    # via pytest
 pyaml==19.12.0
-pycodestyle==2.5.0        # via flake8
-pycparser==2.19           # via cffi
-pycryptodome==3.9.4       # via python-jose
-pyflakes==2.1.1           # via flake8
-pygments==2.5.2           # via sphinx
-pyparsing==2.4.6          # via packaging
-pyrsistent==0.14.11
-pytest-cov==2.8.1
-pytest-flask==0.15.0
+    # via moto
+pycodestyle==2.5.0
+    # via flake8
+pycparser==2.19
+    # via cffi
+pyflakes==2.1.1
+    # via flake8
+pygments==2.5.2
+    # via sphinx
+pyparsing==2.4.6
+    # via packaging
+pyrsistent==0.15.7
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   jsonschema
 pytest==5.3.2
-python-dateutil==2.8.0
-python-jose==2.0.2
+    # via
+    #   -r dev-requirements.in
+    #   pytest-cov
+    #   pytest-flask
+pytest-cov==2.8.1
+    # via -r dev-requirements.in
+pytest-flask==0.15.0
+    # via -r dev-requirements.in
+python-dateutil==2.8.1
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   botocore
+    #   croniter
+    #   moto
 python-levenshtein==0.12.0
-pytz==2019.1
-pyyaml==5.1
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+pytz==2019.3
+    # via
+    #   -r web-requirements.txt
+    #   babel
+    #   flask-restful
+    #   moto
+pyyaml==5.3
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   aspy-yaml
+    #   bandit
+    #   pre-commit
+    #   pyaml
 raven[flask]==6.10.0
-redis==3.2.1
-requests==2.22.0          # via aws-xray-sdk, codecov, docker, responses, sphinx
-responses==0.10.9
+    # via -r web-requirements.txt
+redis==3.4.1
+    # via
+    #   -r web-requirements.txt
+    #   flask-rq2
+    #   rq
+requests==2.22.0
+    # via
+    #   aws-xray-sdk
+    #   codecov
+    #   docker
+    #   moto
+    #   sphinx
 retrying==1.3.3
-rq-scheduler==0.9
-rq==1.0
-ruamel.yaml.clib==0.2.0   # via ruamel.yaml
-ruamel.yaml==0.16.5       # via pre-commit-hooks
-s3transfer==0.2.0
-simplejson==3.16.0
-six==1.12.0
-smmap2==2.0.5             # via gitdb2
-snowballstemmer==2.0.0    # via sphinx
-sphinx-autodoc-annotation==1.0.post1
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   swag-client
+rq==1.2.2
+    # via
+    #   -r web-requirements.txt
+    #   flask-rq2
+    #   rq-scheduler
+rq-scheduler==0.9.1
+    # via
+    #   -r web-requirements.txt
+    #   flask-rq2
+ruamel-yaml==0.16.5
+    # via pre-commit-hooks
+s3transfer==0.3.3
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   boto3
+simplejson==3.17.0
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   swag-client
+six==1.14.0
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   bandit
+    #   cfgv
+    #   cryptography
+    #   docker
+    #   flask-restful
+    #   jsonschema
+    #   mock
+    #   moto
+    #   packaging
+    #   pip-tools
+    #   pre-commit
+    #   pre-commit-hooks
+    #   pyrsistent
+    #   python-dateutil
+    #   retrying
+    #   stevedore
+    #   websocket-client
+smmap2==2.0.5
+    # via gitdb2
+snowballstemmer==2.0.0
+    # via sphinx
 sphinx==2.3.1
-sphinxcontrib-applehelp==1.0.1  # via sphinx
-sphinxcontrib-devhelp==1.0.1  # via sphinx
-sphinxcontrib-htmlhelp==1.0.2  # via sphinx
-sphinxcontrib-jsmath==1.0.1  # via sphinx
-sphinxcontrib-qthelp==1.0.2  # via sphinx
-sphinxcontrib-serializinghtml==1.1.3  # via sphinx
-stevedore==1.31.0         # via bandit
-swag-client==0.4.6
-tabulate==0.8.3
-toml==0.10.0              # via pre-commit, pre-commit-hooks
-typed-ast==1.4.0          # via mypy
-typing-extensions==3.7.4.1  # via mypy
-urllib3==1.24.1
-virtualenv==16.7.9        # via pre-commit
-wcwidth==0.1.7            # via pytest
-websocket-client==0.57.0  # via docker
-werkzeug==0.15.2
-wrapt==1.11.2             # via aws-xray-sdk
+    # via
+    #   -r dev-requirements.in
+    #   sphinx-autodoc-annotation
+sphinx-autodoc-annotation==1.0.post1
+    # via -r dev-requirements.in
+sphinxcontrib-applehelp==1.0.1
+    # via sphinx
+sphinxcontrib-devhelp==1.0.1
+    # via sphinx
+sphinxcontrib-htmlhelp==1.0.2
+    # via sphinx
+sphinxcontrib-jsmath==1.0.1
+    # via sphinx
+sphinxcontrib-qthelp==1.0.2
+    # via sphinx
+sphinxcontrib-serializinghtml==1.1.3
+    # via sphinx
+stevedore==1.31.0
+    # via bandit
+swag-client==0.4.7
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+tabulate==0.8.6
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   swag-client
+toml==0.10.0
+    # via
+    #   pre-commit
+    #   pre-commit-hooks
+typed-ast==1.4.0
+    # via mypy
+typing-extensions==3.7.4.1
+    # via mypy
+urllib3==1.25.8
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   botocore
+    #   requests
+virtualenv==16.7.9
+    # via pre-commit
+wcwidth==0.1.7
+    # via pytest
+websocket-client==0.57.0
+    # via docker
+werkzeug==3.0.1
+    # via
+    #   -r web-requirements.txt
+    #   flask
+    #   moto
+    #   pytest-flask
+wrapt==1.11.2
+    # via aws-xray-sdk
 xmltodict==0.12.0
-zipp==0.6.0               # via importlib-metadata
+    # via moto
+zipp==2.2.0
+    # via
+    #   -r requirements.txt
+    #   -r web-requirements.txt
+    #   importlib-metadata
